@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ads4gpts-langchain"
+version = "0.1.0"
+description = "Ads for GPT/LLM applications. Enabling the Freemium model for the AI era."
+authors = ["Ioannis Bakagiannis"]
+license = "LICENCE"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.3.7"
+langgraph = "^0.2.50"
+httpx = "^0.27.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.setuptools.packages.find]
+where = ["."]
