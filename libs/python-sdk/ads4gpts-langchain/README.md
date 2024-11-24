@@ -1,8 +1,8 @@
 # Ads4GPTs Langchain Toolkit
 
-This is the LangChain toolkit for Ads4GPTs.# Ads4GPTs LangChain Integration
+This is the LangChain toolkit for Ads4GPTs.
 
-A Python package that integrates Ads4GPTs functionalities into LangChain applications, allowing for seamless retrieval of relevant advertisements based on contextual input using OpenAI's GPT models.
+A Python package that integrates Ads4GPTs functionalities into LangChain applications, allowing for seamless retrieval of relevant advertisements based on contextual input.
 
 ---
 
@@ -28,7 +28,7 @@ A Python package that integrates Ads4GPTs functionalities into LangChain applica
 
 ## Introduction
 
-**Ads4GPTs LangChain Integration** is a Python package designed to seamlessly incorporate Ads4GPTs functionalities into your LangChain applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of OpenAI's GPT models and LangChain's agent framework.
+**Ads4GPTs LangChain Integration** is a Python package designed to seamlessly incorporate Ads4GPTs functionalities into your LangChain applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of LangChain's agentic framework.
 
 Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 
@@ -40,7 +40,6 @@ Whether you're building a chatbot, a recommendation system, or any application t
 - **Contextual Ad Retrieval**: Fetch relevant ads based on the provided context to enhance user engagement.
 - **Asynchronous Support**: Both synchronous and asynchronous operations are supported for flexibility.
 - **Robust Error Handling**: Comprehensive error handling and logging for reliable production deployments.
-- **Configurable**: Customize API endpoints, retry mechanisms, and more to suit your needs.
 - **Secure API Key Management**: Securely handle API keys through environment variables or direct input.
 
 ---
@@ -60,8 +59,8 @@ pip install ads4gpts-langchain
 Alternatively, you can install the package from source:
 
 ``` bash
-git clone https://github.com/ads4gps.com/ads4gpts.git
-cd libs/python-sdk/ads4gpts-langchain
+git clone https://github.com/ADS4GPTs/ads4gpts.git
+cd ads4gpts/libs/python-sdk/ads4gpts-langchain
 pip install .
 ```
 ## Usage
@@ -79,7 +78,7 @@ pip install .
 
 Install required Python packages:
 ```bash
-pip install langchain-openai requests httpx pydantic
+pip install -r requirements.txt
 ```
 
 ## Environment Variables
@@ -94,7 +93,7 @@ Set them in your environment:
 export OPENAI_API_KEY='your-openai-api-key'
 export ADS4GPTS_API_KEY='your-ads4gpts-api-key'
 ```
-Alternatively, you can pass the API keys directly when initializing classes.
+Alternatively, you can pass the API keys directly when initializing classes or set up a .env file.
 
 ## Initialization
 
@@ -179,7 +178,7 @@ This project is licensed under the License of the Ads4GPTs repository.
 
 - Author: Ioannis Bakagiannis
 - Email: contact@ads4gpts.com
-- GitHub: @blackbak
+- GitHub: @ads4gpts
 
 For issues and feature requests, please use the GitHub issues page.
 

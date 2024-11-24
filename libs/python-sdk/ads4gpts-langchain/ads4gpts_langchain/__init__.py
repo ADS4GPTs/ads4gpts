@@ -1,4 +1,4 @@
-# Version: 0.1.0
+# Version: 0.1.1
 """
 Ads4GPTs LangChain Integration Package
 ======================================
