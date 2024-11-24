@@ -18,9 +18,6 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-from util import get_from_env, get_from_dict_or_env
-
-
 def get_ads4gpts_agent(*args, **kwargs):
     """
     Initialize and return the Ads4GPTs agent with the given API keys.
