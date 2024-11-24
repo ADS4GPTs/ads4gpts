@@ -72,12 +72,12 @@ ads4gpts/
 
 A sky full of stars, share the love <3
 
-<a href="https://github.com/ads4gpts.com/ads4gpts">
-  <img src="https://img.shields.io/github/stars/ads4gpts.com/ads4gpts.svg?style=social&label=Star&maxAge=2592000" alt="GitHub stars">
+<a href="https://github.com/ADS4GPTs/ads4gpts">
+  <img src="https://avatars.githubusercontent.com/u/189342217?s=400&u=dfea6a7d06648aca5ee5f14621c3deb24c93bf54&v=4?style=social&label=Star&maxAge=2592000" alt="GitHub stars">
 </a>
 
 ## Installation
-
+v
 ### Installing Individual Packages
 
 Each SDK or integration is located within its respective directory under `libs/`. To use any of the packages, navigate to its directory and install it individually.
