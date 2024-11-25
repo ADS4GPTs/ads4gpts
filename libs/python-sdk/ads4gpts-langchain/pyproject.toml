@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ads4gpts-langchain"
-version = "0.1.1"
+version = "0.1.0"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = ["Ioannis Bakagiannis"]
 license = "GNU AGPLv3"
