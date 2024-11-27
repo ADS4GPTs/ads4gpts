@@ -1,18 +1,15 @@
 {
   "dockerfile_lines": [],
   "graphs": {
-    "agent": "prebuilt_agent.py:graph"
+    "agent": "./prebuilt_agent.py:graph"
   },
   "env": {
     "OPENAI_API_KEY": "secret-key",
-    "ADS4GPTS_API_KEY": "default_key",
+    "ADS4GPTS_API_KEY": "default_api_key",
     "AD_FREQUENCY": "1"
   },
   "python_version": "3.11",
   "dependencies": [
-    "langgraph",
-    "langchain",
-    "httpx",
     "ads4gpts-langchain"
   ]
 }

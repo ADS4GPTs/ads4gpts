@@ -13,6 +13,10 @@ Core Features
 
 ## Files
 
+### .env
+
+You need to put your own .env with ADS4GPTS_API_KEY and OPENAI_API_KEY
+
 ### langgraph.json
 
 In case you want to use LangGraph Cloud or Studio to run this example.

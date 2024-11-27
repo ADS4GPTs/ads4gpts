@@ -23,6 +23,10 @@ This method brings a balance between maintaining revenue flow and providing a no
 
 ## Files
 
+### .env
+
+You need to put your own .env with ADS4GPTS_API_KEY and OPENAI_API_KEY
+
 ### utils.py
 
 It has the next_fibonacci_number function that we use to calculate the next ad_frequency number.
