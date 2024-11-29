@@ -40,7 +40,6 @@ Whether you're building a chatbot, a recommendation system, or any application t
 - **Contextual Ad Retrieval**: Fetch relevant ads based on the provided context to enhance user engagement.
 - **Asynchronous Support**: Both synchronous and asynchronous operations are supported for flexibility.
 - **Robust Error Handling**: Comprehensive error handling and logging for reliable production deployments.
-- **Secure API Key Management**: Securely handle API keys through environment variables or direct input.
 
 ---
 
@@ -72,14 +71,8 @@ pip install .
   - In order to use the ads4gpts_agent you 
   - Sign up at OpenAI and obtain an API key.
 - Ads4GPTs API Key
-  - Obtain an API key for the Ads4GPTs service at https://ads4gpts.com
+  - Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
 
-## Dependencies
-
-Install required Python packages:
-```bash
-pip install -r requirements.txt
-```
 
 ## Environment Variables
 
@@ -139,7 +132,7 @@ ads = tools[0]._run(context="Healthy recipes and cooking tips", num_ads=1)
 print(ads)
 ```
 
-Examples for using them in your LangChain and LangGraph application exist in the examples folder
+Examples for using them in your LangChain and LangGraph application exist in the examples folder of the parent repo.
 
 ## Contributing
 
@@ -147,7 +140,7 @@ Contributions are welcome! Please follow these steps:
 1. Fork the Repository: Click the "Fork" button at the top right of the repository page.
 2. Clone Your Fork:
 ```bash
-git clone https://github.com/ads4gpts.com/ads4gpts.git
+git clone git@github.com:ADS4GPTs/ads4gpts.git
 ```
 3. Create a Branch:
 ``` bash
@@ -159,7 +152,7 @@ git checkout -b feature/your-feature-name
 pip install pytest pytest-asyncio
 python -m unittest discover tests
 ```
-Formal tests are still under development. Tests are based on the library contribution..
+Formal tests are still under development.
 6. Commit Changes:
 ```bash
 git commit -am 'Add your commit message here'

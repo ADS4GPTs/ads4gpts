@@ -64,18 +64,28 @@ Defines prompt templates for the conversational agent.
 - Python 3.11
 - API keys for OpenAI and Ads4GPTs.
 
-### Installation
-
-```bash
-pip install ads4gpts-langchain, langchain-openai, langgraph, langchain
-```
-
 ### Usage
 
-1. Notebook execution (Preferred):
+#### Notebook execution (Preferred)
+
   Go to the prebuilt_ad_agent_nb.ipynb and execute the code inline
-2. LangGraph Studio
+
+#### Local deployment
+
+Prerequisites: Docker installed
+
+- LangGraph Studio
+Point the Studion to this folder `ads4gpts/examples/python/langgraph/prebuilt_ad_agent`
+
 3. Using the LangGraph CLI:
+
+Clone the main repo and come to this folder
+```bash
+git clone git@github.com:ADS4GPTs/ads4gpts.git
+cd ads4gpts/examples/python/langgraph/prebuilt_ad_agent
+```
+
+Install langgraph-cli and run the deployment command.
 ```bash
 pip install langgraph-cli
 langgraph up

@@ -45,11 +45,11 @@ A comprehensive monorepo for Ads4GPTs, providing SDKs and integrations for both 
 
 **Ads4GPTs** is a platform that enables developers to integrate contextually relevant advertisements into their applications effortlessly. By leveraging advanced AI models and popular frameworks, Ads4GPTs ensures that ads are meaningful and engaging to users.
 
-This monorepo hosts multiple SDKs and integrations for both Python and JavaScript/TypeScript, organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
+This monorepo hosts multiple SDKs and integrations for both Python and JavaScript (coming soon), organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
 
 ## Join our Network
 
-AI, LLM and GPT applications can apply join our network AI, LLM, and GPT application developers are invited to join our network by visiting our website at https://www.ads4gpts.com. Discover how our platform can help you integrate tailored advertising solutions designed specifically for AI-driven applications.through our website at https://www.ads4gpts.com/contact-us 
+AI, LLM and GPT applications can apply to join our network AI, LLM, and GPT application developers are invited to join our network by visiting our website at https://www.ads4gpts.com. Discover how our platform can help you integrate tailored advertising solutions designed specifically for AI-driven applications through our website at https://www.ads4gpts.com/contact-us 
 
 ## Repository Structure
 
@@ -58,7 +58,7 @@ ads4gpts/
 ├── libs/
 │   ├── python-sdk/
 │   │   ├── ads4gpts-langchain/      # LangChain integration for Python (implemented)
-│   │   ├── ads4gpts-openai/         # Native OpenAI integration for Python (implemented)
+│   │   ├── ads4gpts-openai/         # Native OpenAI integration for Python (coming soon)
 │   │   └── ads4gpts-llama-index/    # LlamaIndex integration for Python (coming soon)
 │   ├── js-sdk/
 │   │   ├── ads4gpts-langchain/      # LangChain integration for JavaScript/TypeScript (coming soon)
@@ -74,21 +74,7 @@ ads4gpts/
 v
 ### Installing Individual Packages
 
-Each SDK or integration is located within its respective directory under `libs/`. To use any of the packages, navigate to its directory and install it individually.
-
-For example, to install the Python LangChain integration:
-
-```bash
-pip install ads4gps-langchain
-```
-
-Similarly, to install the JavaScript/TypeScript LangChain integration:
-
-```bash
-npm install ads4gpts-langchain
-```
-
-You will find more information in the directory of each package within this monorepo.
+Each SDK or integration is located within its respective directory under `libs/`. To use any of the packages, navigate to its directory and follow the instruction details.
 
 ## Usage
 
@@ -96,19 +82,14 @@ You will find usage guides in each package folder within the monorepo.
 
 ## AI Frameworks
 
-### LangChain
+### LangChain / LangGraph
 The LangChain integration for Ads4GPTs allows you to incorporate ad retrieval seamlessly within LangChain and LangGraph agents.
 
 #### Python Package
 Location: /libs/python-sdk/ads4gpts-langchain
 
 #### JavaScript/TypeScript Package
-Location: /libs/js-sdk/ads4gpts-langchain
-
-### LlamaIndex (Coming Soon)
-We are developing support for LlamaIndex.
-
-Stay tuned for updates!
+Location: /libs/js-sdk/ads4gpts-langchain (Not implemented - In roadmap)
 
 ## Examples
 
