@@ -133,6 +133,8 @@ npm run dev
 
 4. Start experimenting by navigating to [http://localhost:3000](http://localhost:3000) with your browser.
 
+**Note:** When using dynamically generated styles with Tailwind CSS, the initial CSS compilation can take up to 30 seconds upon visiting http://localhost:3000 after starting the server. During this time, styles may not render immediately, and refreshing the browser page might be required to display the styles correctly.
+
 ### Playground App Usage
 
 The playground app showcases the functionality of the AdCard component with real-time style editing. It includes:
