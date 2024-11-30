@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Ads4GPTs React TS Playground',
+    title: 'Ads4GPTs React Tailwind Playground',
     description:
         'Start tailoring your Ad Components to your needs with Ads4GPTs',
 };

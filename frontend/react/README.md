@@ -106,9 +106,9 @@ Combine custom styles and render functions for full customization:
 />
 ```
 
-## Running the Playground App
+## Playground App
 
-The repository includes a playground app in the playground folder, allowing you to test and experiment with the AdCard component.
+The repository includes a playground app located in the playground folder, providing a platform to test and experiment with the styling of the AdCard component. The app is available online at [Ads4GPTs Playground](https://ads4gpts-playground.vercel.app/) or can be installed and run locally.
 
 ### Installation
 
@@ -133,13 +133,11 @@ npm run dev
 
 4. Start experimenting by navigating to [http://localhost:3000](http://localhost:3000) with your browser.
 
-### Playground App Overview
+### Playground App Usage
 
 The playground app showcases the functionality of the AdCard component with real-time style editing. It includes:
 
 -   AdCard Display: Displays a sample ad using default or customized styles.
 -   Style Editor: Allows dynamic modification of the Tailwind CSS classes applied to the component's elements.
-
-### Playground App Usage
 
 The style editor initializes its fields with the default Tailwind CSS classes for the AdCard component. Styles can be customized using the provided text areas, and the app instantly previews the changes in the AdCard display.
