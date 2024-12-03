@@ -14,6 +14,6 @@ The most basic way to incorporate ADS4GPTs into your application is with our pre
 - Import Ad agent from ads4gpts-langchain
 - Instantiate Ad Agent with the the ADS4GPTs API Key
 - Give context through "messages" and declare what kind of Ads you want in the ad_prompt
-- Stream output
+- Get Ad Tool output
 
 

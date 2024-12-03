@@ -73,55 +73,45 @@ def get_ads4gpts_agent(*args, **kwargs):
         raise e
 
 
-# def get_ads4gpts_agent(ads4gpts_api_key: Optional[str] = None, openai_api_key: Optional[str] = None):
-#     """
-#     Initialize and return the Ads4GPTs agent with the given API keys.
+def get_ads4gpts_advertiser(*args, **kwargs):
+    """
+    Initialize and return the Ads4GPTs agent with the given API keys.
 
-#     Args:
-#         ads4gpts_api_key (Optional[str]): API key for authenticating with the Ads4GPTs service.
-#             If not provided, it will attempt to retrieve it from the 'ADS4GPTS_API_KEY' environment variable.
+    Args:
+        *args: Positional arguments (not used directly but maintained for extensibility).
+        **kwargs: Keyword arguments for passing API keys and other optional parameters.
 
-#     Returns:
-#         An initialized Ads4GPTs agent ready for use.
+    Keyword Args:
+        openai_api_key (str): API key for the OpenAI service. If not provided, it will
+                              attempt to retrieve it from the 'OPENAI_API_KEY' environment variable.
 
-#     Raises:
-#         ValueError: If the required API keys are not provided or found in environment variables.
-#         Exception: If any other error occurs during initialization.
-#     """
-#     try:
-#         # Retrieve OpenAI API key from environment
+    Returns:
+        An initialized Ads4GPTs agent ready for use.
 
-#         if not openai_api_key:
-#             openai_api_key = os.environ.get("OPENAI_API_KEY")
-#             error_msg = "OPENAI_API_KEY environment variable is not set."
-#             logger.error(error_msg)
-#             raise ValueError(error_msg)
+    Raises:
+        ValueError: If required API keys are not provided or found in environment variables.
+        Exception: If any other error occurs during initialization.
+    """
+    try:
+        # Extract API keys from kwargs or environment variables
+        openai_api_key = get_from_dict_or_env(
+            kwargs, key="openai_api_key", env_key="OPENAI_API_KEY"
+        )
+        # Initialize the language model
+        ads4gpts_advertiser_llm = ChatOpenAI(
+            model="gpt-4o", temperature=0.2, openai_api_key=openai_api_key
+        )
+        logger.info("ChatOpenAI model initialized successfully.")
 
-#         # Retrieve Ads4GPTs API key from argument or environment
-#         if not ads4gpts_api_key:
-#             ads4gpts_api_key = os.environ.get("ADS4GPTS_API_KEY")
-#             if not ads4gpts_api_key:
-#                 error_msg = "Ads4GPTs API key is required but not provided."
-#                 logger.error(error_msg)
-#                 raise ValueError(error_msg)
+        # Create advertising agent
+        ads4gpts_advertiser = ads4gpts_advertiser_prompt | ads4gpts_advertiser_llm
+        logger.info("Ads4GPTs Advertiser created successfully.")
 
-#         # Initialize the language model
-#         ads4gpts_agent_llm = ChatOpenAI(
-#             model="gpt-4", temperature=0.2, openai_api_key=openai_api_key
-#         )
-#         logger.info("ChatOpenAI model initialized successfully.")
+        return ads4gpts_advertiser
 
-#         # Initialize the toolkit
-#         ads4gpts_toolkit = Ads4GPTsToolkit(ads4gpts_api_key=ads4gpts_api_key)
-#         tools = ads4gpts_toolkit.get_tools()
-#         logger.info("Ads4GPTsToolkit initialized and tools retrieved.")
-
-#         # Bind tools to the agent
-#         ads4gpts_agent = ads4gpts_agent_prompt | ads4gpts_agent_llm.bind_tools(tools)
-#         logger.info("Ads4GPTs agent created successfully.")
-
-#         return ads4gpts_agent
-
-#     except Exception as e:
-#         logger.error(f"Error initializing Ads4GPTs agent: {e}")
-#         raise e  # Optionally re-raise the exception after logging
+    except ValueError as e:
+        logger.error(f"Missing API key: {e}")
+        raise e
+    except Exception as e:
+        logger.error(f"Error initializing Ads4GPTs Advertiser: {e}")
+        raise e
