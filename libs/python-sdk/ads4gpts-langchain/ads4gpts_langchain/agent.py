@@ -4,7 +4,7 @@ from typing import Optional
 
 from langchain_openai import ChatOpenAI
 from ads4gpts_langchain.toolkit import Ads4GPTsToolkit
-from ads4gpts_langchain.prompts import ads4gpts_agent_prompt
+from ads4gpts_langchain.prompts import ads4gpts_agent_prompt, ads4gpts_advertiser_prompt
 from ads4gpts_langchain.utils import get_from_dict_or_env
 
 # Configure logging
