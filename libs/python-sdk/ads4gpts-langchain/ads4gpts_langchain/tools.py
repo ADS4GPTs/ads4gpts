@@ -74,9 +74,11 @@ class Ads4GPTsBaseTool(BaseTool):
     def _run(self, **kwargs) -> Union[Dict, List[Dict]]:
         """Synchronous method to retrieve ads."""
         try:
+            # Validate kwargs against args_schema
+            validated_args = self.args_schema(**kwargs)
             url = f"{self.base_url}{self.ads_endpoint}"
             headers = {"Authorization": f"Bearer {self.ads4gpts_api_key}"}
-            payload = kwargs
+            payload = validated_args.dict()
             return get_ads(url=url, headers=headers, payload=payload)
         except Exception as e:
             logger.error(f"An error occurred in _run: {e}")
@@ -85,9 +87,11 @@ class Ads4GPTsBaseTool(BaseTool):
     async def _arun(self, **kwargs) -> Union[Dict, List[Dict]]:
         """Asynchronous method to retrieve ads."""
         try:
+            # Validate kwargs against args_schema
+            validated_args = self.args_schema(**kwargs)
             url = f"{self.base_url}{self.ads_endpoint}"
             headers = {"Authorization": f"Bearer {self.ads4gpts_api_key}"}
-            payload = kwargs
+            payload = validated_args.dict()
             return await async_get_ads(url=url, headers=headers, payload=payload)
         except Exception as e:
             logger.error(f"An error occurred in _arun: {e}")
