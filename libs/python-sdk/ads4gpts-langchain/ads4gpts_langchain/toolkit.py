@@ -4,7 +4,7 @@ from typing import List, Any, Dict, Union, Optional
 
 from langchain_core.tools import BaseTool, BaseToolkit
 from pydantic import Field, root_validator, ValidationError
-from ads4gpts_langchain.tools import Ads4GPTsTool
+from ads4gpts_langchain.tools import Ads4GPTsBannerTool, Ads4GPTsChatTool
 from ads4gpts_langchain.utils import get_from_dict_or_env
 
 # Configure logging
@@ -43,28 +43,13 @@ class Ads4GPTsToolkit(BaseToolkit):
         Returns a list of tools in the toolkit.
         """
         try:
-            ads4gpts_tool = Ads4GPTsTool(ads4gpts_api_key=self.ads4gpts_api_key)
-            return [ads4gpts_tool]
+            ads4gpts_banner_tool = Ads4GPTsBannerTool(
+                ads4gpts_api_key=self.ads4gpts_api_key
+            )
+            ads4gpts_chat_tool = Ads4GPTsChatTool(
+                ads4gpts_api_key=self.ads4gpts_api_key
+            )
+            return [ads4gpts_banner_tool, ads4gpts_chat_tool]
         except Exception as e:
-            logger.error(f"Error initializing Ads4GPTsTool: {e}")
+            logger.error(f"Error initializing Ads4GPTs Tools: {e}")
             return []
-
-
-# from typing import List
-# from langchain_core.tools import BaseTool, BaseToolkit
-# from pydantic import Field
-# from ads4gpts_langchain.tools import Ads4GPTsTool
-
-
-# class Ads4GPTsToolkit(BaseToolkit):
-#     tools: List[BaseTool] = []
-#     ads4gpts_api_key: str = Field(
-#         ..., description="API key for authenticating with the ads database."
-#     )
-
-#     def get_tools(self) -> List[BaseTool]:
-#         """
-#         Returns a list of tools in the toolkit.
-#         """
-#         ads4gpts_tool = Ads4GPTsTool(ads4gpts_api_key=self.ads4gpts_api_key)
-#         return [ads4gpts_tool]

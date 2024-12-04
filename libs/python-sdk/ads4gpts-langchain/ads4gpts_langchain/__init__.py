@@ -7,13 +7,13 @@ This package provides tools, toolkits, and agent initialization functions for in
 Ads4GPTs functionalities into LangChain applications.
 
 Modules:
-- tools.py: Contains the Ads4GPTsTool class for ad retrieval.
+- tools.py: Contains the Ads4GPTsBannerTool and Ads4GPTsChatTool classes for ad retrieval.
 - toolkit.py: Contains the Ads4GPTsToolkit class for grouping tools.
-- agent.py: Contains the get_ads4gpts_agent function for agent initialization.
+- agent.py: Contains the get_ads4gpts_agent and get_ads4gpts_advertiser function for agent initialization.
 
 Usage:
 ```python
-from ads4gpts_langchain import Ads4GPTsTool, Ads4GPTsToolkit, get_ads4gpts_agent
+from ads4gpts_langchain import Ads4GPTsBannerTool, Ads4GPTsChatTool, Ads4GPTsToolkit, get_ads4gpts_agent, get_ads4gpts_advertiser
 
 # Initialize the Ads4GPTs agent
 agent = get_ads4gpts_agent(ads4gpts_api_key='your_api_key')
@@ -35,13 +35,15 @@ if not logger.handlers:
     logger.addHandler(handler)
 
 # Import public classes and functions
-from .tools import Ads4GPTsTool
+from .tools import Ads4GPTsBannerTool, Ads4GPTsChatTool
 from .toolkit import Ads4GPTsToolkit
-from .agent import get_ads4gpts_agent
+from .agent import get_ads4gpts_agent, get_ads4gpts_advertiser
 
 # Define __all__ for explicit export
 __all__ = [
-    "Ads4GPTsTool",
+    "Ads4GPTsBannerTool",
+    "Ads4GPTsChatTool",
     "Ads4GPTsToolkit",
     "get_ads4gpts_agent",
+    "get_ads4gpts_advertiser",
 ]
