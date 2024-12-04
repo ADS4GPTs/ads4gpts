@@ -26,16 +26,22 @@ class Ads4GPTsBaseInput(BaseModel):
     )
 
 
-class Ads4GPTsBannerInput(Ads4GPTsBaseInput):
+class Ads4GPTsBannerInput(BaseModel):
     """Input schema for Ads4GPTsBannerTool."""
 
-    pass
+    context: str = Field(..., description="Context to retrieve relevant ads.")
+    num_ads: int = Field(
+        default=1, ge=1, description="Number of ads to retrieve (must be >= 1)."
+    )
 
 
-class Ads4GPTsChatInput(Ads4GPTsBaseInput):
+class Ads4GPTsChatInput(BaseModel):
     """Input schema for Ads4GPTsChatTool."""
 
-    pass
+    context: str = Field(..., description="Context to retrieve relevant ads.")
+    num_ads: int = Field(
+        default=1, ge=1, description="Number of ads to retrieve (must be >= 1)."
+    )
     # last_message: str = Field(..., description="Last conversation message.")
 
 
@@ -91,7 +97,7 @@ class Ads4GPTsBaseTool(BaseTool):
 class Ads4GPTsBannerTool(Ads4GPTsBaseTool):
     name: str = "ads4gpts_banner_tool"
     description: str = """
-        Tool for retrieving relevant Banner ads based on the provided context.
+        Tool for retrieving relevant Banner Ads based on the provided context.
     Args:
         context (str): Context that will help retrieve the most relevant ads from the ad database. The richer the context, the better the ad fit.
         num_ads (int): Number of ads to retrieve. Defaults to 1.
@@ -107,10 +113,9 @@ class Ads4GPTsBannerTool(Ads4GPTsBaseTool):
 class Ads4GPTsChatTool(Ads4GPTsBaseTool):
     name: str = "ads4gpts_chat_tool"
     description: str = """
-        Tool for retrieving relevant Chat Ads based on the provided context and last conversation message.
+        Tool for retrieving relevant Chat Ads based on the provided context.
     Args:
         context (str): Context that will help retrieve the most relevant ads from the ad database. The richer the context, the better the ad fit.
-        last_message (str): Last message from the ongoing conversation.
         num_ads (int): Number of ads to retrieve. Defaults to 1.
     Returns:
         Union[Dict, List[Dict]]: A single ad or a list of ads, each containing the Ad Text.

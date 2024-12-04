@@ -76,7 +76,7 @@ def get_ads(
         elif isinstance(response_json["data"]["ads"], list):
             return (
                 response_json["data"]["ads"]
-                if num_ads > 1
+                if payload["num_ads"] > 1
                 else response_json["data"]["ads"][0]
             )
         else:
@@ -114,7 +114,7 @@ async def async_get_ads(
                 elif isinstance(response_json["data"]["ads"], list):
                     return (
                         response_json["data"]["ads"]
-                        if num_ads > 1
+                        if payload["num_ads"] > 1
                         else response_json["data"]["ads"][0]
                     )
                 else:
