@@ -9,7 +9,7 @@ Monetize your OpenAI Custom GPTs with ADS4GPTs.
 3. Copy the Prompt Template from the prompt_template.txt and tailor it to your GPT.
 4. Create a new Action.
 5. Import Action from this URL: 
-https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/custom-gpts-openapi/openapi_config.txt
+https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/custom-gpts-openapi/openapi_config.yaml
 6. Select Authentication with API Key and paste the key you got from Step 1
 7. You are done!
 
