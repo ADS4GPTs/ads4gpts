@@ -3,7 +3,7 @@ import logging
 from typing import List, Any, Dict, Union, Optional
 
 from langchain_core.tools import BaseTool, BaseToolkit
-from pydantic import Field, root_validator, ValidationError
+from pydantic import Field, model_validator, ValidationError
 from ads4gpts_langchain.tools import Ads4GPTsBannerTool, Ads4GPTsChatTool
 from ads4gpts_langchain.utils import get_from_dict_or_env
 
@@ -23,7 +23,7 @@ class Ads4GPTsToolkit(BaseToolkit):
         default=None, description="API key for authenticating with the ads database."
     )
 
-    @root_validator(pre=True)
+    @model_validator(mode="before")
     def set_api_key(cls, values):
         """Validate and set the API key from input or environment."""
         api_key = values.get("ads4gpts_api_key")
