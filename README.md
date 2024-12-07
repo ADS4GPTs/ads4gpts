@@ -56,6 +56,7 @@ AI, LLM and GPT applications can apply to join our network AI, LLM, and GPT appl
 ```bash
 ads4gpts/
 ├── libs/
+│   ├── custom-gpts-openapi/         # Integration with OpenAI's Custom GPTs through Actions
 │   ├── python-sdk/
 │   │   ├── ads4gpts-langchain/      # LangChain integration for Python (implemented)
 │   │   ├── ads4gpts-openai/         # Native OpenAI integration for Python (coming soon)
@@ -71,7 +72,7 @@ ads4gpts/
 ```
 
 ## Installation
-v
+
 ### Installing Individual Packages
 
 Each SDK or integration is located within its respective directory under `libs/`. To use any of the packages, navigate to its directory and follow the instruction details.
