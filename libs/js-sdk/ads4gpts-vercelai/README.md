@@ -55,10 +55,7 @@ npm install ads4gpts-vercelai
 
 ### Prerequisites
 
--   Python 3.11+
--   (Optional) OpenAI Account and API Key
-    -   In order to use the ads4gpts_agent you
-    -   Sign up at OpenAI and obtain an API key.
+-   Node.js 18.0.0+
 -   Ads4GPTs API Key
     -   Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
 
@@ -66,7 +63,6 @@ npm install ads4gpts-vercelai
 
 The package requires certain environment variables for API authentication:
 
--   OPENAI_API_KEY: Your OpenAI API key.
 -   ADS4GPTS_API_KEY: Your Ads4GPTs API key.
 
 Set them in your environment:
@@ -148,11 +144,14 @@ git checkout -b feature/your-feature-name
 5. Run Tests: Ensure all tests pass.
 
 ```bash
-pip install pytest pytest-asyncio
-python -m unittest discover tests
+npm run test
+# Or to watch the tests in real time
+npm run test:watch
 ```
 
-Formal tests are still under development. 6. Commit Changes:
+Formal tests are still under development.
+
+6. Commit Changes:
 
 ```bash
 git commit -am 'Add your commit message here'
