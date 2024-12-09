@@ -1,14 +1,32 @@
 {
   "name": "ads4gpts-vercelai",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.0.1",
+  "description": "Ads for AI applications. Enabling the Freemium model for the AI era.",
+  "homepage": "https://www.ads4gpts.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ADS4GPTs/ads4gpts/libs/js-sdk/ads4gpts-vercelai"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ads",
+    "GPT",
+    "LLM",
+    "freemium",
+    "AI"
+  ],
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "author": "Ads4GPTs",
+  "license": "GNU AGPLv3",
   "dependencies": {
     "ai": "^4.0.13",
     "zod": "^3.23.8"

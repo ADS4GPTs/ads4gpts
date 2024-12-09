@@ -1,5 +1,5 @@
 import { systemPrompt } from '@/prompts/systemPrompt';
-import Ads4GPTsToolkit from '@/tools/tools';
+import { Ads4GPTsToolkit } from 'ads4gpts-vercelai';
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
@@ -8,6 +8,8 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
     const { messages } = await req.json();
+
+    const ads4GPTsToolkit = new Ads4GPTsToolkit(process.env.ADS4GPTS_API_KEY);
 
     const result = streamText({
         model: openai('gpt-4o'),
@@ -40,7 +42,7 @@ export async function POST(req: Request) {
                     return { celsius };
                 },
             }),
-            ...Ads4GPTsToolkit.getTools(),
+            ...ads4GPTsToolkit.getTools(),
         },
     });
 
