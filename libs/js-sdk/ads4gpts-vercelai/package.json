@@ -25,6 +25,7 @@
     "prepare": "npm run build",
     "test": "echo \"No tests specified\" && exit 0"
   },
+  "files": ["dist"],
   "author": "Ads4GPTs",
   "license": "GNU AGPLv3",
   "dependencies": {
