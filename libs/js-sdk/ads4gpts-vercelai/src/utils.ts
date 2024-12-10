@@ -25,6 +25,13 @@ async function fetchWithRetry(
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             const response = await fetch(url, { ...options });
+
+            if (!response) {
+                throw new Error(
+                    'No response received from server. Request failed.'
+                );
+            }
+
             if (!response.ok) {
                 throw new Error(
                     `HTTP error: ${response.status} ${response.statusText}`
@@ -34,9 +41,9 @@ async function fetchWithRetry(
                 | BannerAdsResponse
                 | ChatAdsResponse;
             return json;
-        } catch (err: unknown) {
-            const errorMessage =
-                err instanceof Error ? err.message : String(err);
+        } catch (err: any) {
+            const errorMessage = err.message;
+
             console.error(
                 `Fetch attempt ${attempt}/${maxRetries} failed: ${errorMessage}`
             );

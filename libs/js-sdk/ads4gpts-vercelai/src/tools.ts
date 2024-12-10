@@ -21,9 +21,8 @@ export function ads4gptsBannerTool(apiKey: string) {
         execute: async ({ context, num_ads }) => {
             try {
                 return await getAds('/api/v1/banner_ads', { context, num_ads });
-            } catch (error: unknown) {
-                const message =
-                    error instanceof Error ? error.message : String(error);
+            } catch (error: any) {
+                const message = error.message;
                 console.error(`Error retrieving banner ads: ${message}`);
                 throw new Error(`ads4gpts_banner_tool failed: ${message}`);
             }
@@ -49,9 +48,8 @@ export function ads4gptsChatTool(apiKey: string) {
         execute: async ({ context, num_ads }) => {
             try {
                 return await getAds('/api/v1/chat_ads', { context, num_ads });
-            } catch (error: unknown) {
-                const message =
-                    error instanceof Error ? error.message : String(error);
+            } catch (error: any) {
+                const message = error.message;
                 console.error(`Error retrieving chat ads: ${message}`);
                 throw new Error(`ads4gpts_chat_tool failed: ${message}`);
             }

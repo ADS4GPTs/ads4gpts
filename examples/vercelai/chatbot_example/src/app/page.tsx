@@ -10,7 +10,6 @@ export default function Chat() {
     return (
         <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
             {messages.map((m) => {
-                // console.log('Message:', m);
                 // Only render if the role is 'user' or 'ai'
                 if (m.role !== 'user' && m.role !== 'assistant') {
                     return null;
@@ -18,19 +17,16 @@ export default function Chat() {
 
                 return (
                     <div key={m.id} className="whitespace-pre-wrap">
-                        <div>
+                        <div className="font-bold text-xl">
                             {m.role === 'user'
-                                ? 'User: '
+                                ? 'User '
                                 : m.toolInvocations
                                 ? null
-                                : 'AI: '}
+                                : 'AI '}
                         </div>
-                        <Markdown className="">{m.content}</Markdown>
-                        {/* {m.toolInvocations ? (
-                            <pre>
-                                {JSON.stringify(m.toolInvocations, null, 2)}
-                            </pre>
-                        ) : null} */}
+                        <Markdown className="prose text-lg">
+                            {m.content}
+                        </Markdown>
                     </div>
                 );
             })}

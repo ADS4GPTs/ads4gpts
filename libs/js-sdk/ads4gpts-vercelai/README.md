@@ -51,6 +51,52 @@ Install the package from npm:
 npm install ads4gpts-vercelai
 ```
 
+### From Source
+
+Alternatively, you can install the package from source:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ADS4GPTs/ads4gpts.git
+```
+
+2. Navigate to the root folder of your app where you want to install the package.
+3. Install the package:
+
+```bash
+npm install path/to/project/ads4gpts/libs/js-sdk/vercelai
+```
+
+### Linking the package from source
+
+To link the package's source with your app's project and reflect changes in real-time, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ADS4GPTs/ads4gpts.git
+```
+
+2. Navigate to the package's directory:
+
+```bash
+cd ads4gpts/libs/js-sdk/vercelai
+```
+
+3. Link the package globally:
+
+```bash
+npm link
+```
+
+4. Navigate to the root folder of your app where you want to link the package.
+5. Link the package to your app:
+
+```bash
+npm link ads4gpts-vercelai
+```
+
 ## Usage
 
 ### Prerequisites
@@ -145,7 +191,7 @@ git checkout -b feature/your-feature-name
 
 ```bash
 npm run test
-# Or to watch the tests in real time
+# Or to automatically rerun tests when files change.
 npm run test:watch
 ```
 
