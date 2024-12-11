@@ -8,21 +8,21 @@ A Python package that integrates Ads4GPTs functionalities into LangChain applica
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Prerequisites](#prerequisites)
-  - [Environment Variables](#environment-variables)
-  - [Initialization](#initialization)
-  - [Examples](#examples)
-- [API Reference](#api-reference)
-  - [Ads4GPTsTool](#ads4gptstool)
-  - [Ads4GPTsToolkit](#ads4gptstoolkit)
-  - [get_ads4gpts_agent Function](#get_ads4gpts_agent-function)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+-   [Introduction](#introduction)
+-   [Features](#features)
+-   [Installation](#installation)
+-   [Usage](#usage)
+    -   [Prerequisites](#prerequisites)
+    -   [Environment Variables](#environment-variables)
+    -   [Initialization](#initialization)
+    -   [Examples](#examples)
+-   [API Reference](#api-reference)
+    -   [Ads4GPTsTool](#ads4gptstool)
+    -   [Ads4GPTsToolkit](#ads4gptstoolkit)
+    -   [get_ads4gpts_agent Function](#get_ads4gpts_agent-function)
+-   [Contributing](#contributing)
+-   [License](#license)
+-   [Contact](#contact)
 
 ---
 
@@ -36,10 +36,10 @@ Whether you're building a chatbot, a recommendation system, or any application t
 
 ## Features
 
-- **Easy Integration**: Quickly integrate ad retrieval capabilities into your LangChain agents.
-- **Contextual Ad Retrieval**: Fetch relevant ads based on the provided context to enhance user engagement.
-- **Asynchronous Support**: Both synchronous and asynchronous operations are supported for flexibility.
-- **Robust Error Handling**: Comprehensive error handling and logging for reliable production deployments.
+-   **Easy Integration**: Quickly integrate ad retrieval capabilities into your LangChain agents.
+-   **Contextual Ad Retrieval**: Fetch relevant ads based on the provided context to enhance user engagement.
+-   **Asynchronous Support**: Both synchronous and asynchronous operations are supported for flexibility.
+-   **Robust Error Handling**: Comprehensive error handling and logging for reliable production deployments.
 
 ---
 
@@ -57,35 +57,37 @@ pip install ads4gpts-langchain
 
 Alternatively, you can install the package from source:
 
-``` bash
+```bash
 git clone https://github.com/ADS4GPTs/ads4gpts.git
 cd ads4gpts/libs/python-sdk/ads4gpts-langchain
 pip install .
 ```
+
 ## Usage
 
 ### Prerequisites
 
-- Python 3.11+
-- (Optional) OpenAI Account and API Key
-  - In order to use the ads4gpts_agent you 
-  - Sign up at OpenAI and obtain an API key.
-- Ads4GPTs API Key
-  - Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
-
+-   Python 3.11+
+-   (Optional) OpenAI Account and API Key
+    -   In order to use the ads4gpts_agent you
+    -   Sign up at OpenAI and obtain an API key.
+-   Ads4GPTs API Key
+    -   Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
 
 ## Environment Variables
 
 The package requires certain environment variables for API authentication:
 
-- OPENAI_API_KEY: Your OpenAI API key.
-- ADS4GPTS_API_KEY: Your Ads4GPTs API key.
+-   OPENAI_API_KEY: Your OpenAI API key.
+-   ADS4GPTS_API_KEY: Your Ads4GPTs API key.
 
 Set them in your environment:
+
 ```bash
 export OPENAI_API_KEY='your-openai-api-key'
 export ADS4GPTS_API_KEY='your-ads4gpts-api-key'
 ```
+
 Alternatively, you can pass the API keys directly when initializing classes or set up a .env file.
 
 ## Initialization
@@ -137,30 +139,40 @@ Examples for using them in your LangChain and LangGraph application exist in the
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
+
 1. Fork the Repository: Click the "Fork" button at the top right of the repository page.
 2. Clone Your Fork:
+
 ```bash
 git clone git@github.com:ADS4GPTs/ads4gpts.git
 ```
+
 3. Create a Branch:
-``` bash
+
+```bash
 git checkout -b feature/your-feature-name
 ```
+
 4. Make Changes: Implement your feature or bug fix.
 5. Run Tests: Ensure all tests pass.
+
 ```bash
 pip install pytest pytest-asyncio
 python -m unittest discover tests
 ```
-Formal tests are still under development.
-6. Commit Changes:
+
+Formal tests are still under development. 6. Commit Changes:
+
 ```bash
 git commit -am 'Add your commit message here'
 ```
+
 7. Push to Your Fork:
+
 ```bash
 git push origin feature/your-feature-name
 ```
+
 8. Open a Pull Request: Navigate to the original repository and click "New pull request".
 
 ## License
@@ -169,10 +181,8 @@ This project is licensed under the License of the Ads4GPTs repository.
 
 ## Contact
 
-- Author: Ioannis Bakagiannis
-- Email: contact@ads4gpts.com
-- GitHub: @ads4gpts
+-   Author: ADS4GPTs
+-   Email: contact@ads4gpts.com
+-   GitHub: @ads4gpts
 
 For issues and feature requests, please use the GitHub issues page.
-
-
