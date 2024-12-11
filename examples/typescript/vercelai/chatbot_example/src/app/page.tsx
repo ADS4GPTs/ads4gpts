@@ -16,7 +16,6 @@ export default function Chat() {
                     return null;
                 }
 
-                console.log(m);
                 return (
                     <div key={m.id} className="">
                         <div className="font-bold text-xl">
