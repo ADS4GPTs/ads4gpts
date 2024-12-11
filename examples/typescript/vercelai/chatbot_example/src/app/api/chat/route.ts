@@ -1,7 +1,7 @@
 import { chatAdSystemPrompt } from '@/prompts/chatAdSystemPrompt';
 // Uncomment and use this system prompt if you want to use banner ads instead of chat ads
 // import { bannerAdSystemPrompt } from '@/prompts/bannerAdSystemPrompt';
-import { Ads4GPTsToolkit } from 'ads4gpts-vercelai';
+import { ADS4GPTsToolkit } from 'ads4gpts-vercelai';
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
@@ -12,7 +12,7 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
     const { messages } = await req.json();
 
-    const ads4GPTsToolkit = new Ads4GPTsToolkit(process.env.ADS4GPTS_API_KEY);
+    const ads4GPTsToolkit = new ADS4GPTsToolkit(process.env.ADS4GPTS_API_KEY);
 
     const result = streamText({
         model: openai('gpt-4o'),

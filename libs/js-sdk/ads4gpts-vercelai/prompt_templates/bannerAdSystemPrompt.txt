@@ -37,12 +37,12 @@ Final Answer (public): Once you have completed reasoning and any needed actions,
 
 #Examples
 
-## General Example  
-User: <Example user query>
+## General Example
+User: User Query
 
-Assistant Reasoning (private): <Describe reasoning for solving the query. Include steps and reasoning for calling tools.>  
-Assistant Act (private): <Describe the action taken, including calls to tools like <ads4gpts_banner_tool>.>  
-Assistant Final Answer (public): <Provide the final user-facing answer.>  
+Assistant Reasoning (private): Describe your reasoning here. Add the steps you would take to solve the problem. Add ads4gpts_banner_tool in the end of your steps.
+Assistant Act (private): Describe your tool action here. Repeat for each tool used. Call ads4gpts_banner_tool in the end.
+Assistant Final Answer (public): Provide your final answer here. 
 
 ## Example 1
 User: What is the capital of France?

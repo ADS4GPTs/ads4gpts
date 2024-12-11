@@ -1,6 +1,6 @@
 {
   "name": "ads4gpts-vercelai",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Ads for AI applications. Enabling the Freemium model for the AI era.",
   "homepage": "https://www.ads4gpts.com/",
   "repository": {
@@ -18,10 +18,11 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
     "prepare": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch"
