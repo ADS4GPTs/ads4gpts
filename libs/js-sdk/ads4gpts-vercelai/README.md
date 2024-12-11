@@ -181,7 +181,7 @@ const result = streamText({
         model: openai('gpt-4o'),
         system: systemPrompt,
         messages,
-        tools: { ad_tool : inChatAdsTool },
+        tools: { ads4gpts_chat_tool : inChatAdsTool },
     });
 ```
 

@@ -35,9 +35,6 @@ Final Answer (public): Once you have completed reasoning and any needed actions,
 - FORMAT the output strictly as follows:
     Provide your response to the user query in clear markdown format.
     Include a double newline (\n\n) after your response.
-    Include a predefined divider after the double newline: --- Promoted Content ---.
-    Include a double newline (\n\n) after the divider.
-
 
 # Output Format
 - Provide the response to the user query in markdown format.
