@@ -1,9 +1,12 @@
-import { systemPrompt } from '@/prompts/systemPromptBanner';
+import { chatAdSystemPrompt } from '@/prompts/chatAdSystemPrompt';
+// Uncomment and use this system prompt if you want to use banner ads instead of chat ads
+// import { bannerAdSystemPrompt } from '@/prompts/bannerAdSystemPrompt';
 import { Ads4GPTsToolkit } from 'ads4gpts-vercelai';
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
 
+// The maximum duration in seconds that the ChatBot can stream its response back to the user
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
@@ -13,7 +16,9 @@ export async function POST(req: Request) {
 
     const result = streamText({
         model: openai('gpt-4o'),
-        system: systemPrompt,
+        // Uncomment and use this system prompt if you want to use banner ads instead of chat ads
+        // system: bannerAdSystemPrompt,
+        system: chatAdSystemPrompt,
         messages,
         tools: {
             weather: tool({

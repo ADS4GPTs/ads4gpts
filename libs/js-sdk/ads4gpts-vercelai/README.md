@@ -15,6 +15,7 @@ An npm package that integrates ADS4GPTs functionalities into applications built 
     -   [Prerequisites](#prerequisites)
     -   [Environment Variables](#environment-variables)
     -   [Initialization](#initialization)
+    -   [System Prompt Templates](#system-prompt-templates)
     -   [Examples](#examples)
 -   [Contributing](#contributing)
 -   [License](#license)
@@ -107,7 +108,7 @@ npm link ads4gpts-vercelai
 -   ADS4GPTs API Key
     -   Obtain an API key for the ADS4GPTs service at https://ads4gpts.com/contact-us
 
-## Environment Variables
+### Environment Variables
 
 The package requires certain environment variables for API authentication:
 
@@ -121,7 +122,7 @@ export ADS4GPTS_API_KEY='your-ads4gpts-api-key'
 
 Alternatively, you can pass the API keys directly when initializing the toolkit or individual tools or set up a .env file.
 
-## Initialization
+### Initialization
 
 Import the necessary toolkit class or tools in your Typescript code:
 
@@ -133,7 +134,22 @@ import {
 } from 'ads4gpts-vercelai';
 ```
 
-## Examples
+### System Prompt Templates
+
+When using the ADS4GPTs Toolkit with Vercel AI SDK, it's essential to include a system prompt that aligns with the ad retrieval functionalities. This ensures the toolkit's tools operate correctly and return contextually relevant advertisements with the desired frequency and in chat integration.
+
+To simplify the process, ADS4GPTs provides ready-to-use prompt templates as starting points. These templates are designed to help you quickly integrate or enhance your app's functionality with ADS4GPTs tools.
+Available Prompt Templates:
+
+-   [System prompt for Chat ads](https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/vercel-ai-examples/libs/js-sdk/ads4gpts-vercelai/prompt_templates/chatAdSystemPrompt.txt):
+    A template tailored for integrating contextually relevant chat-based advertisements.
+
+-   [System prompt for Banner ads](https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/vercel-ai-examples/libs/js-sdk/ads4gpts-vercelai/prompt_templates/bannerAdSystemPrompt.txt):
+    A template for incorporating banner-style ads into your application.
+
+Simply adapt these templates to your application's specific requirements and include them in your system prompt during initialization. Using these prompts ensures optimal ad performance and a seamless user experience.
+
+### Examples
 
 Example 1: Using the ADS4GPTs Toolkit
 

@@ -131,7 +131,7 @@ The ADS4GPTs toolkit showcases its primary functionality by embedding relevant a
 
 ### ChatBot Without ADS4GPTs Toolkit
 
-The ChatBot includes basic tools, such as fetching weather information and converting temperatures. Example code:
+The ChatBot includes basic tools, such as fetching mock weather information and converting temperatures. Example code:
 
 ```typescript
 const result = streamText({
@@ -174,9 +174,16 @@ const result = streamText({
 By integrating the ADS4GPTs toolkit, the ChatBot gains the ability to embed contextually relevant advertisements directly into its responses, making interactions more informative and commercially valuable. Example code:
 
 ```typescript
+// =============== Initialize the ADS4GPTs toolkit =======================
+const ads4GPTsToolkit = new ADS4GPTsToolkit(process.env.ADS4GPTS_API_KEY);
+// =======================================================================
+
 const result = streamText({
     model: openai('gpt-4o'),
-    system: systemPrompt,
+    // ========= System prompt based on ADS4GPTs templates with optimized instructions for
+    // delivering contextual in-chat ads
+    system: chatAdSystemPrompt,
+    // ===================================================================================
     messages,
     tools: {
         weather: tool({
