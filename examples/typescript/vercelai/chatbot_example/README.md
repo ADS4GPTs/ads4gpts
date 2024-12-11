@@ -1,8 +1,8 @@
-# Simple ChatBot with Ads4GPTs Vercel AI SDK Toolkit
+# Simple ChatBot with ADS4GPTs Vercel AI SDK Toolkit
 
 This is a simple ChatBot built with [`Vercel AI SDK`] (https://sdk.vercel.ai/docs/getting-started) and [Next.js](https://nextjs.org) bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-It utilizes the [`Ads4GPTs`] (https://www.ads4gpts.com/) Vercel AI toolkit, allowing for seamless retrieval of relevant advertisements based on contextual input to the ChatBot.
+It utilizes the [`ADS4GPTs`] (https://www.ads4gpts.com/) Vercel AI toolkit, allowing for seamless retrieval of relevant advertisements based on contextual input to the ChatBot.
 
 ---
 
@@ -13,6 +13,7 @@ It utilizes the [`Ads4GPTs`] (https://www.ads4gpts.com/) Vercel AI toolkit, allo
     -   [Environment Variables](#environment-variables)
 -   [Project Structure](#project-structure)
     -   [Key Files & Folders](#key-files-and-folders)
+-   [ChaBot Functionality Showcase](#chatbot-functionality-showcase)
 -   [Contributing](#contributing)
 -   [License](#license)
 -   [Contact](#contact)
@@ -32,7 +33,7 @@ git clone https://github.com/ADS4GPTs/ads4gpts.git
 2. Navigate to the example's directory:
 
 ```bash
-cd ads4gpts/examples/vercelai/chatbot_example
+cd ads4gpts/examples/typescript/vercelai/chatbot_example
 ```
 
 3. Install the required dependencies:
@@ -55,15 +56,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 -   OpenAI Account and API Key
     -   Sign up at OpenAI and obtain an API key.
--   Ads4GPTs API Key
-    -   Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
+-   ADS4GPTs API Key
+    -   Obtain an API key for the ADS4GPTs service at https://ads4gpts.com/contact-us
 
 ### Environment Variables
 
 This example requires certain environment variables for API authentication:
 
 -   OPENAI_API_KEY: Your OpenAI API key.
--   ADS4GPTS_API_KEY: Your Ads4GPTs API key.
+-   ADS4GPTS_API_KEY: Your ADS4GPTs API key.
 
 Set them in your environment:
 
@@ -124,6 +125,93 @@ src/
 
 This structure consolidates the application's logic within the src/app directory, promoting a clean, modular, and maintainable codebase.
 
+## ChatBot Functionality Showcase
+
+The ADS4GPTs toolkit showcases its primary functionality by embedding relevant advertisements directly into ChatBot responses based on user input. This demonstration highlights how the toolkit integrates these ads seamlessly to enrich interactions and deliver contextually valuable experiences. Below is a detailed overview of ChatBot functionality, both with and without the ADS4GPTs toolkit.
+
+### ChatBot Without ADS4GPTs Toolkit
+
+The ChatBot includes basic tools, such as fetching weather information and converting temperatures. Example code:
+
+```typescript
+const result = streamText({
+    model: openai('gpt-4o'),
+    system: systemPrompt,
+    messages,
+    tools: {
+        weather: tool({
+            description: 'Get the weather in a location (fahrenheit)',
+            parameters: z.object({
+                location: z
+                    .string()
+                    .describe('The location to get the weather for'),
+            }),
+            execute: async ({ location }) => {
+                const temperature = Math.round(Math.random() * (90 - 32) + 32);
+                return { location, temperature };
+            },
+        }),
+        convertFahrenheitToCelsius: tool({
+            description: 'Convert a temperature in fahrenheit to celsius',
+            parameters: z.object({
+                temperature: z
+                    .number()
+                    .describe('The temperature in fahrenheit to convert'),
+            }),
+            execute: async ({ temperature }) => {
+                const celsius = Math.round((temperature - 32) * (5 / 9));
+                return { celsius };
+            },
+        }),
+    },
+});
+```
+
+![ChatBot Without Toolkit](./chatbot_without_toolkit.png)
+
+### ChatBot With ADS4GPTs Toolkit
+
+By integrating the ADS4GPTs toolkit, the ChatBot gains the ability to embed contextually relevant advertisements directly into its responses, making interactions more informative and commercially valuable. Example code:
+
+```typescript
+const result = streamText({
+    model: openai('gpt-4o'),
+    system: systemPrompt,
+    messages,
+    tools: {
+        weather: tool({
+            description: 'Get the weather in a location (fahrenheit)',
+            parameters: z.object({
+                location: z
+                    .string()
+                    .describe('The location to get the weather for'),
+            }),
+            execute: async ({ location }) => {
+                const temperature = Math.round(Math.random() * (90 - 32) + 32);
+                return { location, temperature };
+            },
+        }),
+        convertFahrenheitToCelsius: tool({
+            description: 'Convert a temperature in fahrenheit to celsius',
+            parameters: z.object({
+                temperature: z
+                    .number()
+                    .describe('The temperature in fahrenheit to convert'),
+            }),
+            execute: async ({ temperature }) => {
+                const celsius = Math.round((temperature - 32) * (5 / 9));
+                return { celsius };
+            },
+        }),
+        // ======== This single line of code adds the ADS4GPT tools =========
+        ...ads4GPTsToolkit.getTools(),
+        // ==================================================================
+    },
+});
+```
+
+![ChatBot With Toolkit](./chatbot_with_toolkit.png)
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
@@ -158,11 +246,11 @@ git push origin feature/your-feature-name
 
 ## License
 
-This project is licensed under the License of the Ads4GPTs repository.
+This project is licensed under the License of the ADS4GPTs repository.
 
 ## Contact
 
--   Author: Ioannis Bakagiannis
+-   Author: ADS4GPTs
 -   Email: contact@ads4gpts.com
 -   GitHub: @ads4gpts
 

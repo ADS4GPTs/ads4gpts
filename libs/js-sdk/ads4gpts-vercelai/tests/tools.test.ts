@@ -1,250 +1,6 @@
-// import { ads4gptsBannerTool, ads4gptsChatTool } from '../src/tools';
+import { ADS4GPTsChatTool, ADS4GPTsBannerTool } from '../src/tools';
 
-// describe('Ads4GPTs Tools', () => {
-//     const API_KEY = 'test-api-key';
-//     const mockToolExecutionOptions = {
-//         toolCallId: 'test-tool-call-id',
-//         messages: [
-//             {
-//                 role: 'user' as 'user',
-//                 content: 'What are the best travel deals?',
-//             },
-//             {
-//                 role: 'system' as 'system',
-//                 content: 'Fetching ads for travel deals...',
-//             },
-//         ],
-//         abortSignal: new AbortController().signal,
-//     };
-
-//     beforeEach(() => {
-//         global.fetch = jest.fn();
-//     });
-
-//     afterEach(() => {
-//         jest.restoreAllMocks();
-//     });
-
-//     describe('ads4gptsBannerTool', () => {
-//         it('should return a single ad object when num_ads is 1 and response is a single object', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: {
-//                         creative: 'Creative Content',
-//                         header: 'Ad Header',
-//                         copy: 'Ad Copy',
-//                         cta_link: 'https://example.com',
-//                     },
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const bannerTool = ads4gptsBannerTool(API_KEY);
-//             const result = await bannerTool.execute(
-//                 { context: 'test-context', num_ads: 1 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual({
-//                 creative: 'Creative Content',
-//                 header: 'Ad Header',
-//                 copy: 'Ad Copy',
-//                 cta_link: 'https://example.com',
-//             });
-//         });
-
-//         it('should return a single ad object when num_ads is 1 and response is an array with one item', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: [
-//                         {
-//                             creative: 'Creative Content',
-//                             header: 'Ad Header',
-//                             copy: 'Ad Copy',
-//                             cta_link: 'https://example.com',
-//                         },
-//                     ],
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const bannerTool = ads4gptsBannerTool(API_KEY);
-//             const result = await bannerTool.execute(
-//                 { context: 'test-context', num_ads: 1 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual({
-//                 creative: 'Creative Content',
-//                 header: 'Ad Header',
-//                 copy: 'Ad Copy',
-//                 cta_link: 'https://example.com',
-//             });
-//         });
-
-//         it('should return multiple ads when num_ads is greater than 1', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: [
-//                         {
-//                             creative: 'Creative Content 1',
-//                             header: 'Ad Header 1',
-//                             copy: 'Ad Copy 1',
-//                             cta_link: 'https://example1.com',
-//                         },
-//                         {
-//                             creative: 'Creative Content 2',
-//                             header: 'Ad Header 2',
-//                             copy: 'Ad Copy 2',
-//                             cta_link: 'https://example2.com',
-//                         },
-//                     ],
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const bannerTool = ads4gptsBannerTool(API_KEY);
-//             const result = await bannerTool.execute(
-//                 { context: 'test-context', num_ads: 2 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual([
-//                 {
-//                     creative: 'Creative Content 1',
-//                     header: 'Ad Header 1',
-//                     copy: 'Ad Copy 1',
-//                     cta_link: 'https://example1.com',
-//                 },
-//                 {
-//                     creative: 'Creative Content 2',
-//                     header: 'Ad Header 2',
-//                     copy: 'Ad Copy 2',
-//                     cta_link: 'https://example2.com',
-//                 },
-//             ]);
-//         });
-//     });
-
-//     describe('ads4gptsChatTool', () => {
-//         it('should return a single ad object when num_ads is 1 and response is a single object', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: {
-//                         ad_text: 'Chat Ad Text',
-//                         ad_link: 'https://chat.example.com',
-//                     },
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const chatTool = ads4gptsChatTool(API_KEY);
-//             const result = await chatTool.execute(
-//                 { context: 'test-context', num_ads: 1 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual({
-//                 ad_text: 'Chat Ad Text',
-//                 ad_link: 'https://chat.example.com',
-//             });
-//         });
-
-//         it('should return a single ad object when num_ads is 1 and response is an array with one item', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: [
-//                         {
-//                             ad_text: 'Chat Ad Text',
-//                             ad_link: 'https://chat.example.com',
-//                         },
-//                     ],
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const chatTool = ads4gptsChatTool(API_KEY);
-//             const result = await chatTool.execute(
-//                 { context: 'test-context', num_ads: 1 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual({
-//                 ad_text: 'Chat Ad Text',
-//                 ad_link: 'https://chat.example.com',
-//             });
-//         });
-
-//         it('should return multiple ads when num_ads is greater than 1', async () => {
-//             const mockResponse = {
-//                 status: 'success',
-//                 data: {
-//                     ads: [
-//                         {
-//                             ad_text: 'Chat Ad Text 1',
-//                             ad_link: 'https://chat1.example.com',
-//                         },
-//                         {
-//                             ad_text: 'Chat Ad Text 2',
-//                             ad_link: 'https://chat2.example.com',
-//                         },
-//                     ],
-//                 },
-//             };
-
-//             (global.fetch as jest.Mock).mockResolvedValueOnce({
-//                 ok: true,
-//                 json: async () => mockResponse,
-//             });
-
-//             const chatTool = ads4gptsChatTool(API_KEY);
-//             const result = await chatTool.execute(
-//                 { context: 'test-context', num_ads: 2 },
-//                 mockToolExecutionOptions
-//             );
-
-//             expect(result).toEqual([
-//                 {
-//                     ad_text: 'Chat Ad Text 1',
-//                     ad_link: 'https://chat1.example.com',
-//                 },
-//                 {
-//                     ad_text: 'Chat Ad Text 2',
-//                     ad_link: 'https://chat2.example.com',
-//                 },
-//             ]);
-//         });
-//     });
-// });
-
-import { ads4gptsBannerTool, ads4gptsChatTool } from '../src/tools';
-
-describe('Ads4GPTs Tools', () => {
+describe('ADS4GPTs Tools', () => {
     const API_KEY = 'test-api-key';
     const mockToolExecutionOptions = {
         toolCallId: 'test-tool-call-id',
@@ -270,14 +26,14 @@ describe('Ads4GPTs Tools', () => {
         jest.restoreAllMocks();
     });
 
-    describe('ads4gptsBannerTool', () => {
+    describe('ADS4GPTsBannerTool', () => {
         it('should log and throw an error if fetching banner ads fails', async () => {
             const errorMessage = 'Network error';
             (global.fetch as jest.Mock).mockRejectedValue(
                 new Error(errorMessage)
             );
 
-            const bannerTool = ads4gptsBannerTool(API_KEY);
+            const bannerTool = ADS4GPTsBannerTool(API_KEY);
 
             await expect(
                 bannerTool.execute(
@@ -317,14 +73,14 @@ describe('Ads4GPTs Tools', () => {
         });
     });
 
-    describe('ads4gptsChatTool', () => {
+    describe('ADS4GPTsChatTool', () => {
         it('should log and throw an error if fetching chat ads fails', async () => {
             const errorMessage = 'Timeout error';
             (global.fetch as jest.Mock).mockRejectedValue(
                 new Error(errorMessage)
             );
 
-            const chatTool = ads4gptsChatTool(API_KEY);
+            const chatTool = ADS4GPTsChatTool(API_KEY);
 
             await expect(
                 chatTool.execute(

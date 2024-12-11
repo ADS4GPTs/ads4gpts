@@ -16,7 +16,7 @@ export default function Chat() {
                 }
 
                 return (
-                    <div key={m.id} className="whitespace-pre-wrap">
+                    <div key={m.id} className="">
                         <div className="font-bold text-xl">
                             {m.role === 'user'
                                 ? 'User '
@@ -24,7 +24,7 @@ export default function Chat() {
                                 ? null
                                 : 'AI '}
                         </div>
-                        <Markdown className="prose text-lg">
+                        <Markdown className="prose text-lg whitespace-normal">
                             {m.content}
                         </Markdown>
                     </div>

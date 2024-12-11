@@ -1,12 +1,12 @@
-import Ads4GPTsToolkit from '../src/toolkit';
-import { ads4gptsBannerTool, ads4gptsChatTool } from '../src/tools';
+import ADS4GPTsToolkit from '../src/toolkit';
+import { ADS4GPTsBannerTool, ADS4GPTsChatTool } from '../src/tools';
 
 jest.mock('../src/tools', () => ({
     ads4gptsBannerTool: jest.fn(),
     ads4gptsChatTool: jest.fn(),
 }));
 
-describe('Ads4GPTsToolkit', () => {
+describe('ADS4GPTsToolkit', () => {
     const API_KEY = 'test-api-key';
 
     beforeEach(() => {
@@ -15,10 +15,10 @@ describe('Ads4GPTsToolkit', () => {
 
     it('should return a record of tools initialized with the API key', () => {
         // Mock the tools to return dummy values
-        (ads4gptsBannerTool as jest.Mock).mockReturnValue('mockedBannerTool');
-        (ads4gptsChatTool as jest.Mock).mockReturnValue('mockedChatTool');
+        (ADS4GPTsBannerTool as jest.Mock).mockReturnValue('mockedBannerTool');
+        (ADS4GPTsChatTool as jest.Mock).mockReturnValue('mockedChatTool');
 
-        const toolkit = new Ads4GPTsToolkit(API_KEY);
+        const toolkit = new ADS4GPTsToolkit(API_KEY);
         const tools = toolkit.getTools();
 
         expect(tools).toEqual({
@@ -27,8 +27,8 @@ describe('Ads4GPTsToolkit', () => {
         });
 
         // Verify that the tools were called with the API key
-        expect(ads4gptsBannerTool).toHaveBeenCalledWith(API_KEY);
-        expect(ads4gptsChatTool).toHaveBeenCalledWith(API_KEY);
+        expect(ADS4GPTsBannerTool).toHaveBeenCalledWith(API_KEY);
+        expect(ADS4GPTsChatTool).toHaveBeenCalledWith(API_KEY);
     });
 
     it('should throw an error if no API key is provided and no environment variable is set', () => {
@@ -37,8 +37,8 @@ describe('Ads4GPTsToolkit', () => {
         delete process.env.ADS4GPTS_API_KEY;
 
         expect(() => {
-            new Ads4GPTsToolkit();
-        }).toThrowError(
+            new ADS4GPTsToolkit();
+        }).toThrow(
             'Missing API key. Provide it in the constructor or set ADS4GPTS_API_KEY env var.'
         );
 
@@ -51,12 +51,12 @@ describe('Ads4GPTsToolkit', () => {
         const originalEnvKey = process.env.ADS4GPTS_API_KEY;
         process.env.ADS4GPTS_API_KEY = 'env-api-key';
 
-        const toolkit = new Ads4GPTsToolkit();
+        const toolkit = new ADS4GPTsToolkit();
         const tools = toolkit.getTools();
 
         expect(tools).toBeDefined();
-        expect(ads4gptsBannerTool).toHaveBeenCalledWith('env-api-key');
-        expect(ads4gptsChatTool).toHaveBeenCalledWith('env-api-key');
+        expect(ADS4GPTsBannerTool).toHaveBeenCalledWith('env-api-key');
+        expect(ADS4GPTsChatTool).toHaveBeenCalledWith('env-api-key');
 
         // Restore the environment variable
         process.env.ADS4GPTS_API_KEY = originalEnvKey;

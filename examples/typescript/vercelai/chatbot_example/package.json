@@ -1,6 +1,6 @@
 {
   "name": "chatbot_example",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.7",
-    "ads4gpts-vercelai": "^0.0.1",
+    "ads4gpts-vercelai": "0.0.1",
     "ai": "^4.0.13",
     "dotenv": "^16.4.7",
     "next": "15.0.4",

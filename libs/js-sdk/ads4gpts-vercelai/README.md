@@ -1,8 +1,8 @@
-# Ads4GPTs Vercel AI SDK Toolkit
+# ADS4GPTs Vercel AI SDK Toolkit
 
-This is the Vercel AI SDK toolkit for Ads4GPTs.
+This is the Vercel AI SDK toolkit for ADS4GPTs.
 
-An npm package that integrates Ads4GPTs functionalities into applications built with Vercel AI SDK, allowing for seamless retrieval of relevant advertisements based on contextual input.
+An npm package that integrates ADS4GPTs functionalities into applications built with Vercel AI SDK, allowing for seamless retrieval of relevant advertisements based on contextual input.
 
 ---
 
@@ -24,9 +24,9 @@ An npm package that integrates Ads4GPTs functionalities into applications built 
 
 ## Introduction
 
-**Ads4GPTs Vercel AI SDK Toolkit** is an npm package designed to seamlessly incorporate Ads4GPTs functionalities into your Vercel AI SDK based applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of Vercel AI SDK.
+**ADS4GPTs Vercel AI SDK Toolkit** is an npm package designed to seamlessly incorporate ADS4GPTs functionalities into your Vercel AI SDK based applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of Vercel AI SDK.
 
-Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
+Whether you're building a chatbot or an Gen AI weather app and you want to monetize and grow through Ads, this package offers a robust and production-ready solution.
 
 ---
 
@@ -40,6 +40,8 @@ Whether you're building a chatbot, a recommendation system, or any application t
     Options to use each tool standalone or the whole toolkit for added flexibility
 -   **Production-Ready:**  
     Clear error handling, retry logic, and environment-based configuration for a robust production setup.
+-   **Privacy-First**
+    User data are provided not mined. You control what is being sent over.
 
 ---
 
@@ -102,14 +104,14 @@ npm link ads4gpts-vercelai
 ### Prerequisites
 
 -   Node.js 18.0.0+
--   Ads4GPTs API Key
-    -   Obtain an API key for the Ads4GPTs service at https://www.ads4gpts.com
+-   ADS4GPTs API Key
+    -   Obtain an API key for the ADS4GPTs service at https://ads4gpts.com/contact-us
 
 ## Environment Variables
 
 The package requires certain environment variables for API authentication:
 
--   ADS4GPTS_API_KEY: Your Ads4GPTs API key.
+-   ADS4GPTS_API_KEY: Your ADS4GPTs API key.
 
 Set them in your environment:
 
@@ -121,25 +123,25 @@ Alternatively, you can pass the API keys directly when initializing the toolkit 
 
 ## Initialization
 
-Import the necessary toolkit class or tool functions in your Typescript code:
+Import the necessary toolkit class or tools in your Typescript code:
 
 ```typescript
 import {
-    Ads4GPTsToolkit,
-    ads4gptsChatTool,
-    ads4gptsBannerTool,
+    ADS4GPTsToolkit,
+    ADS4GPTsChatTool,
+    ADS4GPTsBannerTool,
 } from 'ads4gpts-vercelai';
 ```
 
 ## Examples
 
-Example 1: Using the Ads4GPTsToolkit
+Example 1: Using the ADS4GPTs Toolkit
 
 ```typescript
-import { Ads4GPTsToolkit} from 'ads4gpts-vercelai';
+import { ADS4GPTsToolkit} from 'ads4gpts-vercelai';
 
 # Instantiate the toolkit (API key retrieved from environment variable)
-const ads_toolkit = Ads4GPTsToolkit()
+const ads_toolkit = ADS4GPTsToolkit()
 
 # Add to your streamText function call
 const result = streamText({
@@ -153,10 +155,10 @@ const result = streamText({
 Example 2: Using the tools Directly
 
 ```typescript
-import { ads4gptsChatTool } from 'ads4gpts-vercelai';
+import { ADS4GPTsChatTool } from 'ads4gpts-vercelai';
 
 # Instantiate the tool (API key retrieved from environment variable)
-const inChatAdsTool = ads4gptsChatTool()
+const inChatAdsTool = ADS4GPTsChatTool()
 
 # Add to your streamText function call
 const result = streamText({
@@ -213,11 +215,11 @@ git push origin feature/your-feature-name
 
 ## License
 
-This project is licensed under the License of the Ads4GPTs repository.
+This project is licensed under the License of the ADS4GPTs repository.
 
 ## Contact
 
--   Author: Ioannis Bakagiannis
+-   Author: ADS4GPTs
 -   Email: contact@ads4gpts.com
 -   GitHub: @ads4gpts
 

@@ -6,7 +6,7 @@ import { initGetAdsFunction } from './utils';
 /**
  * Returns a Vercel AI SDK Tool for retrieving Banner Ads.
  */
-export function ads4gptsBannerTool(apiKey: string) {
+export function ADS4GPTsBannerTool(apiKey: string) {
     const getAds = initGetAdsFunction(apiKey);
     return tool({
         description: `
@@ -33,7 +33,7 @@ export function ads4gptsBannerTool(apiKey: string) {
 /**
  * Returns a Vercel AI SDK Tool for retrieving Chat Ads.
  */
-export function ads4gptsChatTool(apiKey: string) {
+export function ADS4GPTsChatTool(apiKey: string) {
     const getAds = initGetAdsFunction(apiKey);
     return tool({
         description: `

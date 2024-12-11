@@ -1,7 +1,7 @@
 import type { CoreTool } from 'ai';
-import { ads4gptsBannerTool, ads4gptsChatTool } from './tools';
+import { ADS4GPTsBannerTool, ADS4GPTsChatTool } from './tools';
 
-class Ads4GPTsToolkit {
+class ADS4GPTsToolkit {
     private apiKey: string;
 
     constructor(apiKey?: string) {
@@ -17,10 +17,10 @@ class Ads4GPTsToolkit {
      */
     getTools(): Record<string, CoreTool> {
         return {
-            ads4gpts_banner_tool: ads4gptsBannerTool(this.apiKey),
-            ads4gpts_chat_tool: ads4gptsChatTool(this.apiKey),
+            ads4gpts_banner_tool: ADS4GPTsBannerTool(this.apiKey),
+            ads4gpts_chat_tool: ADS4GPTsChatTool(this.apiKey),
         };
     }
 }
 
-export default Ads4GPTsToolkit;
+export default ADS4GPTsToolkit;
