@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, JSX } from 'react';
-import { cn } from './utils'; // Utility for merging class names - update this import path in your project as needed
+import { cn } from '../utils'; // Utility for merging class names - update this import path in your project as needed
 
 /** Default styles for the AdCard */
 const adStyles = {

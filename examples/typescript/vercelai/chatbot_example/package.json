@@ -12,11 +12,13 @@
     "@ai-sdk/openai": "^1.0.7",
     "ads4gpts-vercelai": "0.0.1",
     "ai": "^4.0.13",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "next": "15.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-markdown": "^9.0.1"
+    "react-markdown": "^9.0.1",
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
