@@ -1,4 +1,4 @@
-import { systemPrompt } from '@/prompts/systemPrompt';
+import { systemPrompt } from '@/prompts/systemPromptBanner';
 import { Ads4GPTsToolkit } from 'ads4gpts-vercelai';
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
