@@ -1,36 +1,36 @@
 openapi: 3.1.0
 info:
-  title: Get Chat Ads
-  description: Retrieve Chat Ads from the ADS4GPTs Ad Network
-  version: v1
+    title: Get Chat Ads
+    description: Retrieve Chat Ads from the ADS4GPTs Ad Network
+    version: v1
 servers:
-  - url: https://ads-api-fp3g.onrender.com/api/v1/chat_ads
+    - url: https://with.ads4gpts.com/api/v1/chat_ads
 paths:
-  /:
-    post:
-      operationId: chat_ads
-      x-openai-isConsequential: false
-      summary: Tool for retrieving relevant Chat Ads based on the provided context and number of Ads
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AdRequest"
-      responses:
-        "204":
-          description: OK
+    /:
+        post:
+            operationId: chat_ads
+            x-openai-isConsequential: false
+            summary: Tool for retrieving relevant Chat Ads based on the provided context and number of Ads
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AdRequest'
+            responses:
+                '204':
+                    description: OK
 components:
-  schemas:
-    AdRequest:
-      type: object
-      required:
-        - context
-        - num_ads
-      properties:
-        context:
-          description: Context to be used to retrieve relavant Ads based on the chat conversation but do not include Personal Data
-          type: string
-        num_ads:
-          description: The number of Ads to retrieve and defaults to 1
-          type: number
+    schemas:
+        AdRequest:
+            type: object
+            required:
+                - context
+                - num_ads
+            properties:
+                context:
+                    description: Context to be used to retrieve relavant Ads based on the chat conversation but do not include Personal Data
+                    type: string
+                num_ads:
+                    description: The number of Ads to retrieve and defaults to 1
+                    type: number

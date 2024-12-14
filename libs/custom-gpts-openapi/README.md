@@ -4,12 +4,12 @@ Monetize your OpenAI Custom GPTs with ADS4GPTs.
 
 ## Steps to put ADS4GPTs into your Custom GPT
 
-1. Get API Key from https://www.ads4gpts.com.
+1. Get API Key from https://www.ads4gpts.com/contact-us.
 2. Create a GPT if you haven't already and navigate to the "Configure" Tab.
 3. Copy the Prompt Template from the prompt_template.txt and tailor it to your GPT.
 4. Create a new Action.
-5. Import Action from this URL: 
-https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/custom-gpts-openapi/openapi_config.yaml
+5. Import Action from this URL:
+   https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/custom-gpts-openapi/openapi_config.yaml
 6. Select Authentication with API Key and paste the key you got from Step 1
 7. You are done!
 

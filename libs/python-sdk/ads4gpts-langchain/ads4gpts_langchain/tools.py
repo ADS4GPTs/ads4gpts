@@ -49,7 +49,7 @@ class Ads4GPTsBaseTool(BaseTool):
         default=None, description="API key for authenticating with the ads database."
     )
     base_url: str = Field(
-        default="https://ads-api-fp3g.onrender.com",
+        default="https://with.ads4gpts.com",
         description="Base URL for the ads API endpoint.",
     )
     ads_endpoint: str = Field(
