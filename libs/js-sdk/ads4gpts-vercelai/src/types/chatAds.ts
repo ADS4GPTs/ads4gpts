@@ -9,7 +9,6 @@ export type ChatAdsPayload = z.infer<typeof ChatAdsInputSchema>;
 
 export interface ChatAdData {
     ad_text: string;
-    ad_link: string;
 }
 
 export interface ChatAdsResponse {
