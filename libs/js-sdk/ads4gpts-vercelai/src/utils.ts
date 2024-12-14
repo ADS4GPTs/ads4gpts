@@ -77,7 +77,7 @@ export function initGetAdsFunction(apiKey: string) {
         endpoint: string,
         payload: BannerAdsPayload | ChatAdsPayload
     ): Promise<BannerAdData | BannerAdData[] | ChatAdData | ChatAdData[]> {
-        const baseUrl = 'https://ads-api-fp3g.onrender.com';
+        const baseUrl = 'https://with.ads4gpts.com';
         const url = `${baseUrl}${endpoint}`;
         const headers = {
             Authorization: `Bearer ${apiKey}`,

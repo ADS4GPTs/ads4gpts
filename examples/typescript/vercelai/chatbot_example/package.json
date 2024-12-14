@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.7",
-    "ads4gpts-vercelai": "^0.1.2",
+    "ads4gpts-vercelai": "^0.1.4",
     "ai": "^4.0.13",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
