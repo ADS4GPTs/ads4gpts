@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/Visit-ads4gpts.com-orange" alt="Visit ads4gpts.com">
 </a>
 <a href="https://discord.gg/Q8BVQ3wZnc">
-  <img src="https://img.shields.io/badge/Visit-ads4gpts.com-orange" alt="Join Discord">
+  <img src="https://img.shields.io/badge/Join-Discord-purple" alt="Join Discord">
 </a>
 </div>
 
