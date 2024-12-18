@@ -1,6 +1,7 @@
-import { chatAdSystemPrompt } from '@/prompts/chatAdSystemPrompt';
+// import { chatAdSystemPrompt } from '@/prompts/chatAdSystemPrompt';
+import { systemPrompt } from '@/prompts/systemPrompt';
 // Uncomment and use this system prompt if you want to use banner ads instead of chat ads
-// import { bannerAdSystemPrompt } from '@/prompts/bannerAdSystemPrompt';
+import { bannerAdSystemPrompt } from '@/prompts/bannerAdSystemPrompt';
 import { ADS4GPTsToolkit } from 'ads4gpts-vercelai';
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
@@ -11,6 +12,9 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
     const { messages } = await req.json();
+    // based on what type of ads you want to use, you can choose to use chat ads or banner ads
+    // messages.push({ role: 'system', content: chatAdSystemPrompt });
+    messages.push({ role: 'system', content: bannerAdSystemPrompt });
 
     const ads4GPTsToolkit = new ADS4GPTsToolkit(process.env.ADS4GPTS_API_KEY);
 
@@ -18,7 +22,7 @@ export async function POST(req: Request) {
         model: openai('gpt-4o'),
         // Uncomment and use this system prompt if you want to use banner ads instead of chat ads
         // system: bannerAdSystemPrompt,
-        system: chatAdSystemPrompt,
+        system: systemPrompt,
         messages,
         tools: {
             weather: tool({
