@@ -1,4 +1,4 @@
-export const chatAdSystemPrompt = `Retrive One Chat Ad
+export const chatAdSystemPrompt = `Retrieve One Chat Ad
 
 # ads4gpts_chat_tool Critical Instructions
 - Call context: NEVER include Personal Identifiable Information (PII) or sensitive personal data in the context of the ads4gpts_chat_tool.
