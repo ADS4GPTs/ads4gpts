@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export type ads4GPTsTool = {
-    method: string;
+    url: string;
     name: string;
     description: string;
     parameters: z.ZodObject<any>;

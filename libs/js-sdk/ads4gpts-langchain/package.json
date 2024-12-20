@@ -1,6 +1,6 @@
 {
   "name": "ads4gpts-langchain",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Ads for AI applications. Enabling the Freemium model for the AI era.",
   "homepage": "https://www.ads4gpts.com/",
   "repository": {
@@ -30,10 +30,12 @@
     "freemium",
     "AI"
   ],
-  "author": "Ads4GPTs",
+  "author": "ADS4GPTs",
   "license": "GNU AGPLv3",
   "dependencies": {
     "@langchain/core": "^0.3.24",
+    "@langchain/openai": "^0.3.15",
+    "dotenv": "^16.4.7",
     "zod": "^3.24.1"
   },
   "devDependencies": {

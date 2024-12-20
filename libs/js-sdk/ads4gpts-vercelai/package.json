@@ -30,7 +30,7 @@
   "files": [
     "dist"
   ],
-  "author": "Ads4GPTs",
+  "author": "ADS4GPTs",
   "license": "GNU AGPLv3",
   "dependencies": {
     "ai": "^4.0.13",

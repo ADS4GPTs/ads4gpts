@@ -20,13 +20,13 @@ Arguments:
 
 const tools: ads4GPTsTool[] = [
     {
-        method: '/api/v1/banner_ads',
+        url: '/api/v1/banner_ads',
         name: 'ads4gpts_banner_tool',
         description: bannerDescription,
         parameters: BannerAdsInputSchema,
     },
     {
-        method: '/api/v1/chat_ads',
+        url: '/api/v1/chat_ads',
         name: 'ads4gpts_chat_tool',
         description: chatDescription,
         parameters: ChatAdsInputSchema,

@@ -1,5 +1,5 @@
-import { BannerAdData, BannerAdsPayload } from '../../types/bannerAds';
-import { ChatAdData, ChatAdsPayload } from '../../types/chatAds';
+import { BannerAdsPayload } from '../../types/bannerAds';
+import { ChatAdsPayload } from '../../types/chatAds';
 import { fetchWithRetry } from '../utils';
 
 export class ADS4GPTsAPI {
@@ -21,39 +21,34 @@ export class ADS4GPTsAPI {
     async run(
         method: string,
         arg: BannerAdsPayload | ChatAdsPayload
-    ): Promise<
-        | BannerAdData
-        | ChatAdData
-        | BannerAdData[]
-        | ChatAdData[]
-        | { error: string }
-    > {
+    ): Promise<string> {
         const url = `${this.baseUrl}${method}`;
         const headers = {
             Authorization: `Bearer ${this.apiKey}`,
             'Content-Type': 'application/json',
         };
 
-        // arg is expected to conform to the tool’s schema (context, num_ads)
-        const response = await fetchWithRetry(url, {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(arg),
-        });
+        try {
+            // arg is expected to conform to the tool’s schema (context, num_ads)
+            const response = await fetchWithRetry(url, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(arg),
+            });
 
-        // The response should be BannerAdsResponse or ChatAdsResponse
-        if (response && response.data) {
-            const ads = response.data.ads;
-            const numAds = arg.num_ads ?? 1;
+            // The response should be BannerAdsResponse or ChatAdsResponse
+            if (response && response.data) {
+                const ads = response.data.ads;
 
-            if (Array.isArray(ads)) {
-                return numAds > 1 ? ads : ads[0];
-            } else {
-                return ads; // single object
+                return JSON.stringify(ads);
             }
-        }
 
-        // If no data.ads found, return an error
-        return { error: 'No ads found in response.' };
+            // If no Ads are found, return a relevant message
+            return 'No Ads found';
+        } catch (error: unknown) {
+            const errorMessage =
+                error instanceof Error ? error.message : JSON.stringify(error);
+            return `Error fetching ads: ${errorMessage}`;
+        }
     }
 }

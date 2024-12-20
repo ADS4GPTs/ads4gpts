@@ -8,6 +8,9 @@ import {
     BannerAdsResponse,
 } from '../types/bannerAds';
 import { ChatAdData, ChatAdsPayload, ChatAdsResponse } from '../types/chatAds';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 /**
  * Fetch with retry logic. Throws on persistent failure.
@@ -102,4 +105,29 @@ export function initGetAdsFunction(apiKey: string) {
             return adsData;
         }
     };
+}
+
+/**
+ * Retrieves a configuration value from the provided arguments or environment variables.
+ *
+ * @param args - A record of key-value pairs, typically the input arguments.
+ * @param key - The key to look for in the `args` object.
+ * @param envKey - The environment variable key to check if the value is not in `args`.
+ * @returns The value of the key from `args` or the corresponding environment variable.
+ * @throws Error if the key is not found in `args` or the environment.
+ */
+export function getConfigValue(
+    args: Record<string, any>,
+    key: string,
+    envKey: string
+): string {
+    if (args[key]) {
+        return args[key];
+    } else if (process.env[envKey]) {
+        return process.env[envKey] as string;
+    } else {
+        throw new Error(
+            `Missing required key: ${key}. Please provide it in options or set ${envKey} in environment.`
+        );
+    }
 }

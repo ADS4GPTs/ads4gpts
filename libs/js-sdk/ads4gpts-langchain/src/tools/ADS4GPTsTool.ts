@@ -8,21 +8,22 @@ import { ChatAdsPayload } from '../types/chatAds';
 
 export class ADS4GPTsTool extends StructuredTool {
     ads4gptsAPI: ADS4GPTsAPI;
-    method: string;
+    url: string;
     name: string;
     description: string;
     schema: z.ZodObject<any>;
 
     constructor(
         ads4gptsAPI: ADS4GPTsAPI,
-        method: string,
+        name: string,
+        url: string,
         description: string,
         schema: z.ZodObject<any>
     ) {
         super();
         this.ads4gptsAPI = ads4gptsAPI;
-        this.method = method;
-        this.name = method;
+        this.url = url;
+        this.name = name;
         this.description = description;
         this.schema = schema;
     }
@@ -31,9 +32,9 @@ export class ADS4GPTsTool extends StructuredTool {
         arg: z.output<typeof this.schema>,
         _runManager?: CallbackManagerForToolRun,
         _parentConfig?: RunnableConfig
-    ): Promise<any> {
+    ): Promise<string> {
         return this.ads4gptsAPI.run(
-            this.method,
+            this.url,
             arg as BannerAdsPayload | ChatAdsPayload
         );
     }
