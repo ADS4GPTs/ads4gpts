@@ -25,22 +25,22 @@ A comprehensive monorepo for ADS4GPTs, providing SDKs and integrations for both 
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Join our Network](#join-our-network)
-- [Repository Structure](#repository-structure)
-- [Installation](#installation)
-  - [Installing Individual Packages](#installing-individual-packages)
-- [Usage](#usage)
-  - [Python SDKs](#python-sdks)
-  - [JavaScript/TypeScript SDKs](#javascripttypescript-sdks)
-- [AI Frameworks](#ai-framework)
-  - [LangChain](#langchain)
-  - [LlamaIndex (Coming Soon)](#llamaindex-coming-soon)
-- [Examples](#examples)
-- [Frontend Components](#frontend-components)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+-   [Introduction](#introduction)
+-   [Join our Network](#join-our-network)
+-   [Repository Structure](#repository-structure)
+-   [Installation](#installation)
+    -   [Installing Individual Packages](#installing-individual-packages)
+-   [Usage](#usage)
+    -   [Python SDKs](#python-sdks)
+    -   [JavaScript/TypeScript SDKs](#javascripttypescript-sdks)
+-   [AI Frameworks](#ai-framework)
+    -   [LangChain](#langchain)
+    -   [LlamaIndex (Coming Soon)](#llamaindex-coming-soon)
+-   [Examples](#examples)
+-   [Frontend Components](#frontend-components)
+-   [Contributing](#contributing)
+-   [License](#license)
+-   [Contact](#contact)
 
 ---
 
@@ -48,11 +48,11 @@ A comprehensive monorepo for ADS4GPTs, providing SDKs and integrations for both 
 
 **ADS4GPTs** is a platform that enables developers to integrate contextually relevant advertisements into their applications effortlessly. By leveraging advanced AI models and popular frameworks, Ads4GPTs ensures that ads are meaningful and engaging to users.
 
-This monorepo hosts multiple SDKs and integrations for both Python and JavaScript (coming soon), organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
+This monorepo hosts multiple SDKs and integrations for both Python and JavaScript, organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
 
 ## Join our Network
 
-AI, LLM and GPT applications can apply to join our network AI, LLM, and GPT application developers are invited to join our network by visiting our website at https://www.ads4gpts.com. Discover how our platform can help you integrate tailored advertising solutions designed specifically for AI-driven applications through our website at https://www.ads4gpts.com/contact-us 
+AI, LLM and GPT applications can apply to join our network AI, LLM, and GPT application developers are invited to join our network by visiting our website at https://www.ads4gpts.com. Discover how our platform can help you integrate tailored advertising solutions designed specifically for AI-driven applications through our website at https://www.ads4gpts.com/contact-us
 
 Also join our community Discord to be up to date with all the news and interact with out team. [Discord](https://discord.gg/Q8BVQ3wZnc)
 
@@ -65,14 +65,15 @@ ads4gpts/
 │   ├── python-sdk/
 │   │   ├── ads4gpts-langchain/      # LangChain integration for Python
 │   ├── js-sdk/
-│   │   ├── ads4gpts-vercelai/         # Native Vercel AI SDK Integration
-│   │   ├── ads4gpts-langchain/      # LangChain integration for JavaScript/TypeScript (coming soon)
-├── examples/    
+│   │   ├── ads4gpts-vercelai/       # Native Vercel AI SDK Integration
+│   │   ├── ads4gpts-langchain/      # LangChain integration for JavaScript/TypeScript
+├── examples/
 │   ├── python/
 │   │   ├── langchain/      # LangChain examples for Python
 │   │   ├── langgraph/      # LangGraph examples for Python
 │   ├── typescript/
-│   │   ├── vercelai/                       # Extensive examples for Vercel AI SDK and integrations
+│   │   ├── vercelai/                # Extensive examples for Vercel AI SDK and integrations
+│   │   ├── langchain/               # LangChain examples for Typescript
 ├── frontend/                        # React components for copying into your implementation
 ├── README.md                        # Project documentation
 └── LICENSE                          # Licensing information
@@ -91,13 +92,16 @@ You will find usage guides in each package folder within the monorepo.
 ## AI Frameworks
 
 ### LangChain / LangGraph
+
 The LangChain integration for ADS4GPTs allows you to incorporate ad retrieval seamlessly within LangChain and LangGraph agents.
 
 #### Python Package
+
 Location: /libs/python-sdk/ads4gpts-langchain
 
 #### JavaScript/TypeScript Package
-Location: /libs/js-sdk/ads4gpts-langchain (Not implemented - In roadmap)
+
+Location: /libs/js-sdk/ads4gpts-langchain
 
 ## Examples
 
@@ -117,10 +121,8 @@ This project is licensed under the License of the ADS4GPTs repository.
 
 ## Contact
 
-- Author: ADS4GTPs
-- Email: contact@ads4gpts.com
-- GitHub: @ads4gpts
+-   Author: ADS4GTPs
+-   Email: contact@ads4gpts.com
+-   GitHub: @ads4gpts
 
 For issues and feature requests, please use the GitHub issues page.
-
-
