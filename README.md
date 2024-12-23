@@ -69,8 +69,8 @@ ads4gpts/
 │   │   ├── ads4gpts-langchain/      # LangChain integration for JavaScript/TypeScript
 ├── examples/
 │   ├── python/
-│   │   ├── langchain/      # LangChain examples for Python
-│   │   ├── langgraph/      # LangGraph examples for Python
+│   │   ├── langchain/               # LangChain examples for Python
+│   │   ├── langgraph/               # LangGraph examples for Python
 │   ├── typescript/
 │   │   ├── vercelai/                # Extensive examples for Vercel AI SDK and integrations
 │   │   ├── langchain/               # LangChain examples for Typescript
