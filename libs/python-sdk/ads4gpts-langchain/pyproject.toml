@@ -2,7 +2,7 @@
 name = "ads4gpts-langchain"
 version = "0.1.3"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
-authors = ["Ioannis Bakagiannis"]
+authors = ["ADS4GPTs"]
 license = "GNU AGPLv3"
 readme = "README.md"
 homepage = "https://www.ads4gpts.com/"
