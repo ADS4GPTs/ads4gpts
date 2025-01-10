@@ -26,3 +26,9 @@ In the openapi_config.txt file you will find the configuration for the Custom GP
 In the prompt_template.txt file you will find the prompt template that you can build upon to use the Custom GPT Action.
 
 The prompt is a good base for ANY Custom GPT. We recommend to use this structure with the rest of your actions and instructions.
+
+## Show Your Support
+
+If you find our ADS4GPTs project helpful, please give it a star ⭐️
+
+[![GitHub Stars](https://img.shields.io/github/stars/ADS4GPTs/ads4gpts?style=social)](https://github.com/ADS4GPTs/ads4gpts/stargazers)

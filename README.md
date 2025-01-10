@@ -50,6 +50,13 @@ A comprehensive monorepo for ADS4GPTs, providing SDKs and integrations for both 
 
 This monorepo hosts multiple SDKs and integrations for both Python and JavaScript, organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
 
+### Show Your Support
+
+If you find our ADS4GPTs project helpful, please give it a star ⭐️
+
+[![GitHub Stars](https://img.shields.io/github/stars/ADS4GPTs/ads4gpts?style=social)](https://github.com/ADS4GPTs/ads4gpts/stargazers)
+
+
 ## Join our Network
 
 AI, LLM and GPT applications can apply to join our network AI, LLM, and GPT application developers are invited to join our network by visiting our website at https://www.ads4gpts.com. Discover how our platform can help you integrate tailored advertising solutions designed specifically for AI-driven applications through our website at https://www.ads4gpts.com/contact-us

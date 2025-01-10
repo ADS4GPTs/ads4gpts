@@ -28,6 +28,12 @@ An npm Typescript package that integrates ADS4GPTs functionalities into applicat
 
 Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 
+### Show Your Support
+
+If you find our ADS4GPTs project helpful, please give it a star ⭐️
+
+[![GitHub Stars](https://img.shields.io/github/stars/ADS4GPTs/ads4gpts?style=social)](https://github.com/ADS4GPTs/ads4gpts/stargazers)
+
 ---
 
 ## Features

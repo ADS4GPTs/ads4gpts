@@ -29,6 +29,12 @@ An npm package that integrates ADS4GPTs functionalities into applications built 
 
 Whether you're building a chatbot or an Gen AI weather app and you want to monetize and grow through Ads, this package offers a robust and production-ready solution.
 
+### Show Your Support
+
+If you find our ADS4GPTs project helpful, please give it a star ⭐️
+
+[![GitHub Stars](https://img.shields.io/github/stars/ADS4GPTs/ads4gpts?style=social)](https://github.com/ADS4GPTs/ads4gpts/stargazers)
+
 ---
 
 ## Features
