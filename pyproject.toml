@@ -2,7 +2,7 @@
 name = "ads4gpts"
 version = "0.1.0"
 description = "Ads for GPT/LLM applications. Bringing the Freemium model in the AI era."
-authors = ["Ioannis Bakagiannis"]
+authors = ["ADS4GPTs"]
 license = "LICENCE"
 readme = "README.md"
 

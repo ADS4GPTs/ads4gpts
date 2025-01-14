@@ -1,5 +1,5 @@
 {
-  "name": "toolkit_example",
+  "name": "toolkit_with_chat_completion_example",
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "ads4gpts-langchain": "^0.0.4"
+    "ads4gpts-openai": "^0.0.1",
+    "openai": "^4.78.1"
   }
 }

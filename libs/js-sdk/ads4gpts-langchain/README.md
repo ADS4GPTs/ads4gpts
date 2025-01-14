@@ -155,7 +155,7 @@ import { ADS4GPTsToolkit } from 'ads4gpts-langchain';
 // Instantiate the toolkit (API key retrieved from environment variable)
 const ads_toolkit = ADS4GPTsToolkit();
 
-// Get the tools from the toolkit
+// Get the array of tools from the toolkit
 const ads_tools = ads_toolkit.getTools();
 
 // Retrieve ads using one of the tools
@@ -180,7 +180,7 @@ const chatArgs = {
     context: 'Looking for the latest smartphone deals',
     num_ads: 1,
 };
-const ads = await chatTool._call(chatArgs);
+const ads = await inChatAdsTool._call(chatArgs);
 console.log(ads);
 ```
 
