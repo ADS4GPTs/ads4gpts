@@ -6,7 +6,7 @@ export class ADS4GPTsAPI {
     private apiKey: string;
     private baseUrl: string;
 
-    constructor(apiKey: string) {
+    constructor(apiKey: string, baseUrl: string) {
         this.apiKey =
             apiKey ||
             process.env.ADS4GPTS_API_KEY ||
@@ -15,7 +15,7 @@ export class ADS4GPTsAPI {
                     'ads4gpts_api_key is required. Provide it or set ADS4GPTS_API_KEY in env.'
                 );
             })();
-        this.baseUrl = 'https://with.ads4gpts.com';
+        this.baseUrl = baseUrl || 'https://with.ads4gpts.com';
     }
 
     async run(

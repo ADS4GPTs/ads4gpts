@@ -6,8 +6,8 @@
     "example": "npx ts-node src/index.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ADS4GPTs",
+  "license": "GNU AGPLv3",
   "description": "",
   "devDependencies": {
     "@types/node": "^22.10.2",

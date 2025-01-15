@@ -13,14 +13,15 @@ class ADS4GPTsToolkit implements BaseToolkit {
      * @param args - A record of key-value pairs, including an optional API key.
      * @param args.apiKey - Ads4GPTs API key. If not provided, it will attempt to retrieve it from the `ADS4GPTS_API_KEY` environment variable.
      */
-    constructor(args: { apiKey?: string } = {}) {
+    constructor(args: { apiKey?: string; rootUrl?: string } = {}) {
+        const baseUrl = args.rootUrl || 'https://with.ads4gpts.com';
         const ads4gptsApiKey = getConfigValue(
             args,
             'apiKey',
             'ADS4GPTS_API_KEY'
         );
 
-        this.ads4gptsAPI = new ADS4GPTsAPI(ads4gptsApiKey);
+        this.ads4gptsAPI = new ADS4GPTsAPI(ads4gptsApiKey, baseUrl);
 
         this.tools = tools.map(
             (tool) =>

@@ -8,10 +8,11 @@ import { BannerAdsInputSchema } from '../schemas/bannerAds';
 export type BannerAdsPayload = z.infer<typeof BannerAdsInputSchema>;
 
 export interface BannerAdData {
-    creative: string;
-    header: string;
-    copy: string;
-    cta_link: string;
+    ad_creative: string;
+    ad_title: string;
+    ad_body: string;
+    ad_link: string;
+    ad_link_cta: string;
 }
 
 export interface BannerAdsResponse {

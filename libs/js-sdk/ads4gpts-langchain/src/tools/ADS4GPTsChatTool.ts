@@ -12,13 +12,14 @@ export class ADS4GPTsChatTool extends ADS4GPTsTool {
      *
      * @throws Error if the API key is missing or the chat tool configuration is not found.
      */
-    constructor(args: { apiKey?: string } = {}) {
+    constructor(args: { apiKey?: string; rootUrl?: string } = {}) {
+        const baseUrl = args.rootUrl || 'https://with.ads4gpts.com';
         const ads4gptsApiKey = getConfigValue(
             args,
             'apiKey',
             'ADS4GPTS_API_KEY'
         );
-        const ads4gptsAPI = new ADS4GPTsAPI(ads4gptsApiKey);
+        const ads4gptsAPI = new ADS4GPTsAPI(ads4gptsApiKey, baseUrl);
 
         const chatToolConfig = tools.find(
             (tool) => tool.name === 'ads4gpts_chat_tool'
