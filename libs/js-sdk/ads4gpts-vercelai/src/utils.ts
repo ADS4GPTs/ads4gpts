@@ -66,7 +66,7 @@ async function fetchWithRetry(
     throw new Error('Unexpected error in fetchWithRetry.');
 }
 
-export function initGetAdsFunction(apiKey: string) {
+export function initGetAdsFunction(apiKey: string, baseUrl: string) {
     /**
      * Retrieves ads from the ads API endpoint.
      * Throws an error if unable to retrieve ads or if the response is malformed.
@@ -77,7 +77,6 @@ export function initGetAdsFunction(apiKey: string) {
         endpoint: string,
         payload: BannerAdsPayload | ChatAdsPayload
     ): Promise<BannerAdData | BannerAdData[] | ChatAdData | ChatAdData[]> {
-        const baseUrl = 'https://with.ads4gpts.com';
         const url = `${baseUrl}${endpoint}`;
         const headers = {
             Authorization: `Bearer ${apiKey}`,

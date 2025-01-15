@@ -2,6 +2,8 @@
   "name": "chatbot_example",
   "version": "1.0.0",
   "private": true,
+  "author": "ADS4GPTs",
+  "license": "GNU AGPLv3",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

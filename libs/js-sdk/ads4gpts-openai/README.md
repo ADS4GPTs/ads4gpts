@@ -1,8 +1,8 @@
-# ADS4GPTs Vercel AI SDK Toolkit
+# ADS4GPTs OpenAI
 
-This is the Vercel AI SDK toolkit for ADS4GPTs.
+This is the OpenAI toolkit for ADS4GPTs.
 
-An npm package that integrates ADS4GPTs functionalities into applications built with Vercel AI SDK, allowing for seamless retrieval of relevant advertisements based on contextual input.
+An npm Typescript package that integrates ADS4GPTs functionalities into applications built with OpenAI TypeScript and JavaScript API Library, allowing for seamless retrieval of relevant advertisements based on contextual input.
 
 ---
 
@@ -15,7 +15,6 @@ An npm package that integrates ADS4GPTs functionalities into applications built 
     -   [Prerequisites](#prerequisites)
     -   [Environment Variables](#environment-variables)
     -   [Initialization](#initialization)
-    -   [System Prompt Templates](#system-prompt-templates)
     -   [Examples](#examples)
 -   [Contributing](#contributing)
 -   [License](#license)
@@ -25,9 +24,9 @@ An npm package that integrates ADS4GPTs functionalities into applications built 
 
 ## Introduction
 
-**ADS4GPTs Vercel AI SDK Toolkit** is an npm package designed to seamlessly incorporate ADS4GPTs functionalities into your Vercel AI SDK based applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of Vercel AI SDK.
+**Ads4GPTs OpenAI Integration** is a Typescript package designed to seamlessly incorporate Ads4GPTs functionalities into your OpenAI applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of OpenAI.
 
-Whether you're building a chatbot or an Gen AI weather app and you want to monetize and grow through Ads, this package offers a robust and production-ready solution.
+Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 
 ### Show Your Support
 
@@ -40,7 +39,7 @@ If you find our ADS4GPTs project helpful, please give it a star ⭐️
 ## Features
 
 -   **Easy Integration:**  
-    Quickly integrate ad retrieval capabilities into your Vercel AI SDK-driven applications.
+    Quickly integrate ad retrieval capabilities into your OpenAI-driven applications.
 -   **Contextual Ad Retrieval:**  
     Fetch relevant ads based on the provided context to enhance user engagement.
 -   **Flexible and Extensible:**  
@@ -54,10 +53,10 @@ If you find our ADS4GPTs project helpful, please give it a star ⭐️
 
 ## Installation
 
-Install the package from npm:
+You can install the package directly from npm:
 
 ```bash
-npm install ads4gpts-vercelai
+npm install ads4gpts-openai
 ```
 
 ### From Source
@@ -74,7 +73,7 @@ git clone https://github.com/ADS4GPTs/ads4gpts.git
 3. Install the package:
 
 ```bash
-npm install path/to/project/ads4gpts/libs/js-sdk/ads4gpts-vercelai
+npm install path/to/project/ads4gpts/libs/js-sdk/ads4gpts-openai
 ```
 
 ### Linking the package from source
@@ -90,7 +89,7 @@ git clone https://github.com/ADS4GPTs/ads4gpts.git
 2. Navigate to the package's directory:
 
 ```bash
-cd ads4gpts/libs/js-sdk/ads4gpts-vercelai
+cd ads4gpts/libs/js-sdk/ads4gpts-openai
 ```
 
 3. Link the package globally:
@@ -103,7 +102,7 @@ npm link
 5. Link the package to your app:
 
 ```bash
-npm link ads4gpts-vercelai
+npm link ads4gpts-openai
 ```
 
 ## Usage
@@ -137,61 +136,46 @@ import {
     ADS4GPTsToolkit,
     ADS4GPTsChatTool,
     ADS4GPTsBannerTool,
-} from 'ads4gpts-vercelai';
+} from 'ads4gpts-openai';
 ```
-
-### System Prompt Templates
-
-When using the ADS4GPTs Toolkit with Vercel AI SDK, it's essential to include a system prompt that aligns with the ad retrieval functionalities. This ensures the toolkit's tools operate correctly and return contextually relevant advertisements with the desired frequency and in chat integration.
-
-To simplify the process, ADS4GPTs provides ready-to-use prompt templates as starting points. These templates are designed to help you quickly integrate or enhance your app's functionality with ADS4GPTs tools.
-Available Prompt Templates:
-
--   [System prompt for Chat ads](https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/js-sdk/ads4gpts-vercelai/prompt_templates/chatAdSystemPrompt.txt):
-    A template tailored for integrating contextually relevant chat-based advertisements.
-
--   [System prompt for Banner ads](https://raw.githubusercontent.com/ADS4GPTs/ads4gpts/refs/heads/main/libs/js-sdk/ads4gpts-vercelai/prompt_templates/bannerAdSystemPrompt.txt):
-    A template for incorporating banner-style ads into your application.
-
-Simply adapt these templates to your application's specific requirements and include them in your system prompt during initialization. Using these prompts ensures optimal ad performance and a seamless user experience.
 
 ### Examples
 
 Example 1: Using the ADS4GPTs Toolkit
 
 ```typescript
-import { ADS4GPTsToolkit} from 'ads4gpts-vercelai';
+import { ADS4GPTsToolkit } from 'ads4gpts-openai';
 
-# Instantiate the toolkit (API key retrieved from environment variable)
-const ads_toolkit = ADS4GPTsToolkit()
+// Instantiate the toolkit (API key retrieved from environment variable)
+const ads_toolkit = new ADS4GPTsToolkit();
 
-# Add to your streamText function call
-const result = streamText({
-        model: openai('gpt-4o'),
-        system: systemPrompt,
-        messages,
-        tools: { ...ads_toolkit.getTools() },
-    });
+// Retrieve ads using one of the tools
+const chatArgs = {
+    context: 'Looking for the latest smartphone deals',
+    num_ads: 1,
+};
+const ads = await ads_toolkit.executeTool('ads4gpts_banner_tool', chatArgs);
+console.log(ads);
 ```
 
 Example 2: Using the tools Directly
 
 ```typescript
-import { ADS4GPTsChatTool } from 'ads4gpts-vercelai';
+import { ADS4GPTsChatTool } from 'ads4gpts-openai';
 
-# Instantiate the tool (API key retrieved from environment variable)
-const inChatAdsTool = ADS4GPTsChatTool()
+// Instantiate the tool (API key retrieved from environment variable)
+const inChatAdsTool = new ADS4GPTsChatTool();
 
-# Add to your streamText function call
-const result = streamText({
-        model: openai('gpt-4o'),
-        system: systemPrompt,
-        messages,
-        tools: { ads4gpts_chat_tool : inChatAdsTool },
-    });
+// Retrieve ads
+const chatArgs = {
+    context: 'Looking for the latest smartphone deals',
+    num_ads: 1,
+};
+const ads = await inChatAdsTool.execute(chatArgs);
+console.log(ads);
 ```
 
-Examples for using them in your Vercel AI SDK applications exist in the examples folder of the parent repo.
+Examples for using them in your OpenAI application exist in the examples folder of the parent repo.
 
 ## Contributing
 

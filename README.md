@@ -31,10 +31,10 @@ A comprehensive monorepo for ADS4GPTs, providing SDKs and integrations for both 
 -   [Installation](#installation)
     -   [Installing Individual Packages](#installing-individual-packages)
 -   [Usage](#usage)
-    -   [Python SDKs](#python-sdks)
-    -   [JavaScript/TypeScript SDKs](#javascripttypescript-sdks)
--   [AI Frameworks](#ai-framework)
-    -   [LangChain](#langchain)
+-   [AI Frameworks](#ai-frameworks)
+    -   [LangChain/Langgraph](#langchain--langgraph)
+    -   [OpenAI](#openai)
+    -   [Vercel AI SDK](#vercel-ai-sdk)
     -   [LlamaIndex (Coming Soon)](#llamaindex-coming-soon)
 -   [Examples](#examples)
 -   [Frontend Components](#frontend-components)
@@ -49,6 +49,12 @@ A comprehensive monorepo for ADS4GPTs, providing SDKs and integrations for both 
 **ADS4GPTs** is a platform that enables developers to integrate contextually relevant advertisements into their applications effortlessly. By leveraging advanced AI models and popular frameworks, Ads4GPTs ensures that ads are meaningful and engaging to users.
 
 This monorepo hosts multiple SDKs and integrations for both Python and JavaScript, organized in a way that each package can be installed separately. The monorepo itself is not meant to be installed as a whole.
+
+### Show Your Support
+
+If you find our ADS4GPTs project helpful, please give it a star ⭐️
+
+[![GitHub Stars](https://img.shields.io/github/stars/ADS4GPTs/ads4gpts?style=social)](https://github.com/ADS4GPTs/ads4gpts/stargazers)
 
 ## Join our Network
 
@@ -67,6 +73,7 @@ ads4gpts/
 │   ├── js-sdk/
 │   │   ├── ads4gpts-vercelai/       # Native Vercel AI SDK Integration
 │   │   ├── ads4gpts-langchain/      # LangChain integration for JavaScript/TypeScript
+│   │   ├── ads4gpts-openai/         # OpenAI integration for JavaScript/TypeScript
 ├── examples/
 │   ├── python/
 │   │   ├── langchain/               # LangChain examples for Python
@@ -74,6 +81,7 @@ ads4gpts/
 │   ├── typescript/
 │   │   ├── vercelai/                # Extensive examples for Vercel AI SDK and integrations
 │   │   ├── langchain/               # LangChain examples for Typescript
+│   │   ├── openai/                  # OpenAI examples for Typescript
 ├── frontend/                        # React components for copying into your implementation
 ├── README.md                        # Project documentation
 └── LICENSE                          # Licensing information
@@ -102,6 +110,18 @@ Location: /libs/python-sdk/ads4gpts-langchain
 #### JavaScript/TypeScript Package
 
 Location: /libs/js-sdk/ads4gpts-langchain
+
+### OpenAI
+
+#### JavaScript/TypeScript Package
+
+Location: /libs/js-sdk/ads4gpts-openai
+
+### Vercel AI SDK
+
+#### JavaScript/TypeScript Package
+
+Location: /libs/js-sdk/ads4gpts-vercelai
 
 ## Examples
 
