@@ -69,6 +69,10 @@ class ADS4GPTsToolkit {
     }
 
     /**
+     * Overloads to ensure correct inference of return type based on `chatCompletionMethod` value.
+     */
+
+    /**
      * Directly executes the specified tool's function.
      *
      * @param toolType - The type of the tool.
@@ -77,6 +81,16 @@ class ADS4GPTsToolkit {
      * @param args - The arguments for the specified tool's function.
      * @returns The result of the tool's execution.
      */
+    public async executeTool(
+        toolType: 'ads4gpts_banner_tool',
+        args: BannerAdsPayload
+    ): Promise<BannerAdData | BannerAdData[]>;
+
+    public async executeTool(
+        toolType: 'ads4gpts_chat_tool',
+        args: ChatAdsPayload
+    ): Promise<ChatAdData | ChatAdData[]>;
+
     public async executeTool(
         toolType: 'ads4gpts_banner_tool' | 'ads4gpts_chat_tool',
         args: BannerAdsPayload | ChatAdsPayload

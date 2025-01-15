@@ -15,7 +15,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "ads4gpts-openai": "^0.0.2",
+    "ads4gpts-openai": "^0.0.3",
     "openai": "^4.78.1"
   }
 }
