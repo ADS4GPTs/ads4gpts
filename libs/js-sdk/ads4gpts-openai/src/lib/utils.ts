@@ -85,8 +85,7 @@ async function fetchWithRetry(
 export function initGetAdsFunction(
     apiKey: string,
     baseUrl: string,
-    endpoint: string,
-    isBanner = true
+    endpoint: string
 ) {
     /**
      * Retrieves ads from the configured API endpoint.
