@@ -2,7 +2,7 @@ import { initGetAdsFunction } from '../src/utils';
 
 describe('Utils - initGetAdsFunction', () => {
     const API_KEY = 'test-api-key';
-    const getAds = initGetAdsFunction(API_KEY);
+    const getAds = initGetAdsFunction(API_KEY, 'https://with.ads4gpts.com');
 
     beforeEach(() => {
         global.fetch = jest.fn();
