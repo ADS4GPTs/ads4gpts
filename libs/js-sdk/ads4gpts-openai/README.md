@@ -24,7 +24,7 @@ An npm Typescript package that integrates ADS4GPTs functionalities into applicat
 
 ## Introduction
 
-**Ads4GPTs OpenAI Integration** is a Typescript package designed to seamlessly incorporate Ads4GPTs functionalities into your OpenAI applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of OpenAI.
+**Ads4GPTs OpenAI Integration** is a Typescript package designed to seamlessly incorporate Ads4GPTs functionalities into your [OpenAI node](https://github.com/openai/openai-node) applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of OpenAI.
 
 Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 

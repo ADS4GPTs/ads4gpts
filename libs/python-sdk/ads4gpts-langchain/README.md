@@ -28,7 +28,7 @@ A Python package that integrates Ads4GPTs functionalities into LangChain applica
 
 ## Introduction
 
-**Ads4GPTs LangChain Integration** is a Python package designed to seamlessly incorporate Ads4GPTs functionalities into your LangChain applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of LangChain's agentic framework.
+**Ads4GPTs LangChain Integration** is a Python package designed to seamlessly incorporate Ads4GPTs functionalities into your [LangChain](https://github.com/langchain-ai/langchain/tree/master) and [LangGraph](https://github.com/langchain-ai/langgraph) applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of LangChain's agentic framework.
 
 Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 
