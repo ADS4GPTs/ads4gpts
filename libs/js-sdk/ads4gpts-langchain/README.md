@@ -24,7 +24,7 @@ An npm Typescript package that integrates ADS4GPTs functionalities into applicat
 
 ## Introduction
 
-**Ads4GPTs LangChain JS Integration** is a Typescript package designed to seamlessly incorporate Ads4GPTs functionalities into your LangChain applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of LangChain's agentic framework.
+**Ads4GPTs LangChain JS Integration** is a Typescript package designed to seamlessly incorporate Ads4GPTs functionalities into your [LangChain JS](https://github.com/langchain-ai/langchainjs) applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of LangChain's agentic framework.
 
 Whether you're building a chatbot, a recommendation system, or any application that can benefit from targeted ads, this package offers a robust and production-ready solution.
 

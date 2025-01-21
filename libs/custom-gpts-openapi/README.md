@@ -1,6 +1,6 @@
 # ADS4GPTs for OpenAI Custom GPTs
 
-Monetize your OpenAI Custom GPTs with ADS4GPTs.
+Monetize your [OpenAI Custom GPTs](https://chatgpt.com/gpts) with ADS4GPTs.
 
 ## Steps to put ADS4GPTs into your Custom GPT
 

@@ -25,7 +25,7 @@ An npm package that integrates ADS4GPTs functionalities into applications built 
 
 ## Introduction
 
-**ADS4GPTs Vercel AI SDK Toolkit** is an npm package designed to seamlessly incorporate ADS4GPTs functionalities into your Vercel AI SDK based applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of Vercel AI SDK.
+**ADS4GPTs Vercel AI SDK Toolkit** is an npm package designed to seamlessly incorporate ADS4GPTs functionalities into your [Vercel AI SDK](https://github.com/vercel/ai) based applications. It provides tools and utilities to retrieve contextually relevant advertisements, leveraging the power of [Vercel AI SDK](https://github.com/vercel/ai).
 
 Whether you're building a chatbot or an Gen AI weather app and you want to monetize and grow through Ads, this package offers a robust and production-ready solution.
 
