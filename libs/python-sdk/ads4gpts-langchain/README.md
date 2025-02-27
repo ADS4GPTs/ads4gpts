@@ -102,7 +102,7 @@ Alternatively, you can pass the API keys directly when initializing classes or s
 Import the necessary classes and functions in your Python script:
 
 ```python
-from ads4gpts_langchain import Ads4GPTsTool, Ads4GPTsToolkit, get_ads4gpts_agent
+from ads4gpts_langchain import Ads4gptsInlineSponsoredResponsesTool, Ads4gptsSuggestedPromptsTool, Ads4gptsToolkit
 ```
 
 ## Examples
@@ -110,34 +110,60 @@ from ads4gpts_langchain import Ads4GPTsTool, Ads4GPTsToolkit, get_ads4gpts_agent
 Example 1: Using Ads4GPTsTool Directly
 
 ```python
-from ads4gpts_langchain import Ads4GPTsTool
+from ads4gpts_langchain import Ads4gptsInlineSponsoredResponsesTool
 
 # Instantiate the tool (API key retrieved from environment variable)
-ads_tool = Ads4GPTsTool()
+ads_tool = Ads4gptsInlineSponsoredResponsesTool(ads4gpts_api_key="your-ads4gpts-api-key")
 
 # Retrieve ads synchronously
-ads = ads_tool._run(context="Looking for the latest smartphone deals", num_ads=2)
+ads = ads_tool._run(
+    id="test_id",
+    user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+    ad_recommendation="test_recommendation",
+    undesired_ads="test_undesired_ads",
+    context="Looking for the latest smartphone deals",
+    num_ads=2,
+    style="neutral"
+)
 print(ads)
 
 # Retrieve ads asynchronously
 import asyncio
 
 async def fetch_ads():
-    ads = await ads_tool._arun(context="Best travel packages to Europe", num_ads=3)
+    ads = await ads_tool._arun(
+        id="test_id",
+        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        ad_recommendation="test_recommendation",
+        undesired_ads="test_undesired_ads",
+        context="Best travel packages to Europe",
+        num_ads=3,
+        style="neutral"
+    )
     print(ads)
 
 asyncio.run(fetch_ads())
 
-from ads4gpts_langchain import Ads4GPTsToolkit
+### Using the Toolkit
+
+from ads4gpts_langchain import Ads4gptsToolkit
 
 # Initialize the toolkit
-toolkit = Ads4GPTsToolkit()
+toolkit = Ads4gptsToolkit(ads4gpts_api_key="your-ads4gpts-api-key")
 
 # Get the list of tools
 tools = toolkit.get_tools()
 
 # Use the tool from the toolkit
-ads = tools[0]._run(context="Healthy recipes and cooking tips", num_ads=1)
+ads = tools[0]._run(
+    id="test_id",
+    user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+    ad_recommendation="test_recommendation",
+    undesired_ads="test_undesired_ads",
+    context="Healthy recipes and cooking tips",
+    num_ads=1,
+    style="neutral"
+)
 print(ads)
 ```
 
