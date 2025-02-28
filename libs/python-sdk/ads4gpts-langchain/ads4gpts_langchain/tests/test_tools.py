@@ -35,7 +35,11 @@ def suggested_prompts_tool():
 
 @pytest.fixture
 def toolkit():
-    return Ads4gptsToolkit(ads4gpts_api_key="test_api_key")
+    return Ads4gptsToolkit(
+        ads4gpts_api_key="test_api_key",
+        base_url="https://new_base_url.com",
+        another_arg="value",
+    )
 
 
 def test_base_tool_initialization(base_tool):
@@ -181,6 +185,8 @@ async def test_suggested_prompts_tool_arun(mock_async_get_ads, suggested_prompts
 
 def test_toolkit_initialization(toolkit):
     assert toolkit.ads4gpts_api_key == "test_api_key"
+    assert toolkit.tool_args["base_url"] == "https://new_base_url.com"
+    assert toolkit.tool_args["another_arg"] == "value"
 
 
 def test_toolkit_get_tools(toolkit):
@@ -188,3 +194,7 @@ def test_toolkit_get_tools(toolkit):
     assert len(tools) == 2
     assert isinstance(tools[0], Ads4gptsInlineSponsoredResponsesTool)
     assert isinstance(tools[1], Ads4gptsSuggestedPromptsTool)
+    assert tools[0].base_url == "https://new_base_url.com"
+    assert tools[1].base_url == "https://new_base_url.com"
+    # Instead of asserting another_arg is set, verify it is not present:
+    assert not hasattr(tools[0], "another_arg")
