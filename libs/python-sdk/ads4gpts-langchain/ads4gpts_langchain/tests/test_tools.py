@@ -49,7 +49,9 @@ def test_base_tool_run(mock_get_ads, base_tool):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = base_tool._run(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
@@ -66,7 +68,9 @@ async def test_base_tool_arun(mock_async_get_ads, base_tool):
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await base_tool._arun(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
@@ -94,13 +98,15 @@ def test_inline_sponsored_responses_tool_run(
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = inline_sponsored_responses_tool._run(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
         style="neutral",
-        ad_format="Inline Sponsored Responses (Native)",
+        ad_format="INLINE_SPONSORED_RESPONSES",
     )
     mock_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
@@ -114,13 +120,15 @@ async def test_inline_sponsored_responses_tool_arun(
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await inline_sponsored_responses_tool._arun(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
         style="neutral",
-        ad_format="Inline Sponsored Responses (Native)",
+        ad_format="INLINE_SPONSORED_RESPONSES",
     )
     mock_async_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
@@ -137,13 +145,15 @@ def test_suggested_prompts_tool_run(mock_get_ads, suggested_prompts_tool):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = suggested_prompts_tool._run(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
         style="neutral",
-        ad_format="Suggested Prompts (Pre-Chat Ads) (Non-Native)",
+        ad_format="SUGGESTED_PROMPTS",
     )
     mock_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
@@ -155,13 +165,15 @@ async def test_suggested_prompts_tool_arun(mock_async_get_ads, suggested_prompts
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await suggested_prompts_tool._arun(
         id="test_id",
-        user={"gender": "female", "age_range": "25-34", "persona": "test_persona"},
+        user_gender="female",
+        user_age="25-34",
+        user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
         style="neutral",
-        ad_format="Suggested Prompts (Pre-Chat Ads) (Non-Native)",
+        ad_format="SUGGESTED_PROMPTS",
     )
     mock_async_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
