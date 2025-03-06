@@ -12,7 +12,7 @@ Modules:
 
 Usage:
 ```python
-from ads4gpts_langchain import Ads4gptsInlineSponsoredResponsesTool, Ads4gptsSuggestedPromptsTool, Ads4gptsToolkit
+from ads4gpts_langchain import Ads4gptsInlineSponsoredResponseTool, Ads4gptsSuggestedPromptTool, Ads4gptsToolkit
 ```
 
 
@@ -34,12 +34,14 @@ if not logger.handlers:
     logger.addHandler(handler)
 
 # Import public classes and functions
-from .tools import Ads4gptsInlineSponsoredResponsesTool, Ads4gptsSuggestedPromptsTool
+from .tools import Ads4gptsInlineSponsoredResponseTool, Ads4gptsSuggestedPromptTool
 from .toolkit import Ads4gptsToolkit
+from .utils import get_from_dict_or_env
 
 # Define __all__ for explicit export
 __all__ = [
-    "Ads4gptsInlineSponsoredResponsesTool",
-    "Ads4gptsSuggestedPromptsTool",
+    "Ads4gptsInlineSponsoredResponseTool",
+    "Ads4gptsSuggestedPromptTool",
     "Ads4gptsToolkit",
+    "get_from_dict_or_env",
 ]

@@ -7,8 +7,8 @@ from typing import List, Any, Dict, Union, Optional
 from langchain_core.tools import BaseTool, BaseToolkit
 from pydantic import Field, model_validator, ValidationError
 from ads4gpts_langchain.tools import (
-    Ads4gptsInlineSponsoredResponsesTool,
-    Ads4gptsSuggestedPromptsTool,
+    Ads4gptsInlineSponsoredResponseTool,
+    Ads4gptsSuggestedPromptTool,
 )
 from ads4gpts_langchain.utils import get_from_dict_or_env
 
@@ -61,21 +61,21 @@ class Ads4gptsToolkit(BaseToolkit):
         Returns a list of tools in the toolkit.
         """
         try:
-            ads4gpts_inline_sponsored_responses_tool = (
-                Ads4gptsInlineSponsoredResponsesTool(
+            ads4gpts_inline_sponsored_response_tool = (
+                Ads4gptsInlineSponsoredResponseTool(
                     ads4gpts_api_key=self.ads4gpts_api_key,
                     **self.filter_tool_args(
-                        Ads4gptsInlineSponsoredResponsesTool, self.tool_args
+                        Ads4gptsInlineSponsoredResponseTool, self.tool_args
                     ),
                 )
             )
-            ads4gpts_suggested_prompts_tool = Ads4gptsSuggestedPromptsTool(
+            ads4gpts_suggested_prompt_tool = Ads4gptsSuggestedPromptTool(
                 ads4gpts_api_key=self.ads4gpts_api_key,
-                **self.filter_tool_args(Ads4gptsSuggestedPromptsTool, self.tool_args),
+                **self.filter_tool_args(Ads4gptsSuggestedPromptTool, self.tool_args),
             )
             return [
-                ads4gpts_inline_sponsored_responses_tool,
-                ads4gpts_suggested_prompts_tool,
+                ads4gpts_inline_sponsored_response_tool,
+                ads4gpts_suggested_prompt_tool,
             ]
         except Exception as e:
             logger.error(f"Error initializing Ads4GPTs Tools: {e}")
