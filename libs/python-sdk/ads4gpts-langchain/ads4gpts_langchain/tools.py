@@ -91,20 +91,41 @@ class Ads4gptsBaseInput(BaseModel):
 
 
 class AdFormat(str, Enum):
-    INLINE_SPONSORED_RESPONSES = "INLINE_SPONSORED_RESPONSES"
-    SUGGESTED_PROMPTS = "SUGGESTED_PROMPTS"
+    INLINE_SPONSORED_RESPONSE = "INLINE_SPONSORED_RESPONSE"
+    SUGGESTED_PROMPT = "SUGGESTED_PROMPT"
+    INLINE_CONVERSATIONAL = "INLINE_CONVERSATIONAL"
+    INLINE_BANNER = "INLINE_BANNER"
+    SUGGESTED_BANNER = "SUGGESTED_BANNER"
 
 
-class Ads4gptsInlineSponsoredResponsesInput(Ads4gptsBaseInput):
-    """Input schema for ADS4GPTsInlineSponsoredResponsesTool."""
+class Ads4gptsInlineSponsoredResponseInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsInlineSponsoredResponseTool."""
 
-    ad_format: AdFormat = AdFormat.INLINE_SPONSORED_RESPONSES
+    ad_format: AdFormat = AdFormat.INLINE_SPONSORED_RESPONSE
 
 
-class Ads4gptsSuggestedPromptsInput(Ads4gptsBaseInput):
-    """Input schema for Ads4GPTsSuggestedPromptsTool."""
+class Ads4gptsSuggestedPromptInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsSuggestedPromptTool."""
 
-    ad_format: AdFormat = AdFormat.SUGGESTED_PROMPTS
+    ad_format: AdFormat = AdFormat.SUGGESTED_PROMPT
+
+
+class Ads4gptsInlineConversationalInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsInlineConversationalTool."""
+
+    ad_format: AdFormat = AdFormat.INLINE_CONVERSATIONAL
+
+
+class Ads4gptsInlineBannerInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsInlineBannerTool."""
+
+    ad_format: AdFormat = AdFormat.INLINE_BANNER
+
+
+class Ads4gptsSuggestedBannerInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsSuggestedBannerTool."""
+
+    ad_format: AdFormat = AdFormat.SUGGESTED_BANNER
 
 
 class Ads4gptsBaseTool(BaseTool):
@@ -118,11 +139,11 @@ class Ads4gptsBaseTool(BaseTool):
         default=None, description="API key for authenticating with the ads database."
     )
     base_url: str = Field(
-        default="https://with.Ads4gpts.com",
+        default="https://with.ads4gpts.com/",
         description="Base URL for the ads API endpoint.",
     )
     ads_endpoint: str = Field(
-        default="", description="Endpoint path for retrieving ads."
+        default="api/v1/ads/", description="Endpoint path for retrieving ads."
     )
     args_schema: Type[Ads4gptsBaseInput] = Ads4gptsBaseInput
 
@@ -162,8 +183,8 @@ class Ads4gptsBaseTool(BaseTool):
             return {"error": str(e)}
 
 
-class Ads4gptsInlineSponsoredResponsesTool(Ads4gptsBaseTool):
-    name: str = "ads4gpts_inline_sponsored_responses"
+class Ads4gptsInlineSponsoredResponseTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_inline_sponsored_response"
     description: str = """
         Tool for retrieving relevant Inline Sponsored Responses (Native Ads) based on the provided user attributes and context.
 
@@ -179,14 +200,13 @@ class Ads4gptsInlineSponsoredResponsesTool(Ads4gptsBaseTool):
         Returns:
             Union[Dict, List[Dict]]: A single ad or a list of ads, each containing the ad creative, ad header, ad copy, and CTA link.
     """
-    ads_endpoint: str = "/ads"
-    args_schema: Type[Ads4gptsInlineSponsoredResponsesInput] = (
-        Ads4gptsInlineSponsoredResponsesInput
+    args_schema: Type[Ads4gptsInlineSponsoredResponseInput] = (
+        Ads4gptsInlineSponsoredResponseInput
     )
 
 
-class Ads4gptsSuggestedPromptsTool(Ads4gptsBaseTool):
-    name: str = "ads4gpts_suggested_prompts"
+class Ads4gptsSuggestedPromptTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_suggested_prompt"
     description: str = """
         Tool for retrieving Suggested Prompts (Pre-Chat Ads) that engage users with relevant prompts before a conversation begins.
 
@@ -202,5 +222,69 @@ class Ads4gptsSuggestedPromptsTool(Ads4gptsBaseTool):
         Returns:
             Union[Dict, List[Dict]]: A single prompt or a list of suggested prompts, each containing the ad creative, ad header, ad copy, and CTA link.
     """
-    ads_endpoint: str = "/ads"
-    args_schema: Type[Ads4gptsSuggestedPromptsInput] = Ads4gptsSuggestedPromptsInput
+    args_schema: Type[Ads4gptsSuggestedPromptInput] = Ads4gptsSuggestedPromptInput
+
+    class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
+        name: str = "ads4gpts_inline_conversational"
+        description: str = """
+            Tool for retrieving Inline Conversational ads that flow naturally within the conversation context.
+
+            Args:
+                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+                user_gender (str): Gender of the user.
+                user_age (str): Age range of the user.
+                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+                ad_recommendation (str): A free-text description of ads relevant to the user.
+                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+                context (str): A summary of the context the ad is going to be in.
+                num_ads (int): Number of ads to retrieve. Defaults to 1.
+                style (str): The style description of the AI application, defaults to 'neutral'.
+
+            Returns:
+                Union[Dict, List[Dict]]: A single ad or a list of conversational ads, each containing the ad creative and relevant metadata.
+        """
+        args_schema: Type[Ads4gptsInlineConversationalInput] = (
+            Ads4gptsInlineConversationalInput
+        )
+
+    class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
+        name: str = "ads4gpts_inline_banner"
+        description: str = """
+            Tool for retrieving Inline Banner ads that can be displayed within the conversation interface.
+
+            Args:
+                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+                user_gender (str): Gender of the user.
+                user_age (str): Age range of the user.
+                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+                ad_recommendation (str): A free-text description of ads relevant to the user.
+                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+                context (str): A summary of the context the ad is going to be in.
+                num_ads (int): Number of ads to retrieve. Defaults to 1.
+                style (str): The style description of the AI application, defaults to 'neutral'.
+
+            Returns:
+                Union[Dict, List[Dict]]: A single banner or a list of banner ads, each containing image URLs, ad copy, and CTA links.
+        """
+        args_schema: Type[Ads4gptsInlineBannerInput] = Ads4gptsInlineBannerInput
+
+    class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
+        name: str = "ads4gpts_suggested_banner"
+        description: str = """
+            Tool for retrieving Suggested Banner ads that can be recommended to users before or after a conversation.
+
+            Args:
+                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+                user_gender (str): Gender of the user.
+                user_age (str): Age range of the user.
+                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+                ad_recommendation (str): A free-text description of ads relevant to the user.
+                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+                context (str): A summary of the context the ad is going to be in.
+                num_ads (int): Number of ads to retrieve. Defaults to 1.
+                style (str): The style description of the AI application, defaults to 'neutral'.
+
+            Returns:
+                Union[Dict, List[Dict]]: A single banner or a list of suggested banner ads to display alongside the conversation.
+        """
+        args_schema: Type[Ads4gptsSuggestedBannerInput] = Ads4gptsSuggestedBannerInput
