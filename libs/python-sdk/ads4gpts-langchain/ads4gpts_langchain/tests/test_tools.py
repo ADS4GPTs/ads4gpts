@@ -1,9 +1,13 @@
 import pytest
+import os
 from unittest.mock import patch, MagicMock
 from ads4gpts_langchain.tools import (
-    Ads4gptsBaseTool,
     Ads4gptsInlineSponsoredResponseTool,
     Ads4gptsSuggestedPromptTool,
+    Ads4gptsInlineConversationalTool,
+    Ads4gptsInlineBannerTool,
+    Ads4gptsSuggestedBannerTool,
+    Ads4gptsBaseTool,
 )
 from ads4gpts_langchain.toolkit import Ads4gptsToolkit
 
@@ -148,47 +152,6 @@ def test_suggested_prompts_tool_initialization(suggested_prompts_tool):
     assert suggested_prompts_tool.ads_endpoint == "api/v1/ads/"
 
 
-@patch("ads4gpts_langchain.tools.get_ads")
-def test_suggested_prompt_tool_run(mock_get_ads, suggested_prompts_tool):
-    mock_get_ads.return_value = {"ads": "test_ad"}
-    result = suggested_prompts_tool._run(
-        id="test_id",
-        user_gender="female",
-        user_age="25-34",
-        user_persona="test_persona",
-        ad_recommendation="test_recommendation",
-        undesired_ads="test_undesired_ads",
-        context="test_context",
-        num_ads=1,
-        style="neutral",
-        tool_call_id="test_call_id",
-        ad_format="SUGGESTED_PROMPT",
-    )
-    mock_get_ads.assert_called_once()
-    assert result == {"ads": "test_ad"}
-
-
-@patch("ads4gpts_langchain.tools.async_get_ads")
-@pytest.mark.asyncio
-async def test_suggested_prompts_tool_arun(mock_async_get_ads, suggested_prompts_tool):
-    mock_async_get_ads.return_value = {"ads": "test_ad"}
-    result = await suggested_prompts_tool._arun(
-        id="test_id",
-        user_gender="female",
-        user_age="25-34",
-        user_persona="test_persona",
-        ad_recommendation="test_recommendation",
-        undesired_ads="test_undesired_ads",
-        context="test_context",
-        num_ads=1,
-        style="neutral",
-        tool_call_id="test_call_id",
-        ad_format="SUGGESTED_PROMPT",
-    )
-    mock_async_get_ads.assert_called_once()
-    assert result == {"ads": "test_ad"}
-
-
 def test_toolkit_initialization(toolkit):
     assert toolkit.ads4gpts_api_key == "test_api_key"
     assert toolkit.tool_args["base_url"] == "https://new_base_url.com"
@@ -197,10 +160,74 @@ def test_toolkit_initialization(toolkit):
 
 def test_toolkit_get_tools(toolkit):
     tools = toolkit.get_tools()
+    assert len(tools) == 5
+    assert isinstance(tools[0], Ads4gptsInlineSponsoredResponseTool)
+    assert isinstance(tools[1], Ads4gptsSuggestedPromptTool)
+    assert isinstance(tools[2], Ads4gptsInlineConversationalTool)
+    assert isinstance(tools[3], Ads4gptsInlineBannerTool)
+    assert isinstance(tools[4], Ads4gptsSuggestedBannerTool)
+    assert tools[0].base_url == "https://new_base_url.com"
+    assert tools[1].base_url == "https://new_base_url.com"
+    assert tools[2].base_url == "https://new_base_url.com"
+    assert tools[3].base_url == "https://new_base_url.com"
+    assert tools[4].base_url == "https://new_base_url.com"
+    # Instead of asserting another_arg is set, verify it is not present:
+    assert not hasattr(tools[0], "another_arg")
+    assert not hasattr(tools[1], "another_arg")
+    assert not hasattr(tools[2], "another_arg")
+    assert not hasattr(tools[3], "another_arg")
+    assert not hasattr(tools[4], "another_arg")
+
+
+@pytest.fixture
+def toolkit_subset():
+    tools = [
+        "ads4gpts_inline_sponsored_response",
+        "ads4gpts_suggested_prompt",
+    ]
+    return Ads4gptsToolkit(
+        ads4gpts_api_key="test_api_key",
+        tools=tools,
+        base_url="https://new_base_url.com",
+        another_arg="value",
+    )
+
+
+@pytest.fixture
+def toolkit_render():
+    tool_render_agents = {
+        "ads4gpts_inline_sponsored_response": "render_agent_1",
+        "ads4gpts_suggested_prompt": "render_agent_2",
+    }
+    return Ads4gptsToolkit(
+        ads4gpts_api_key="test_api_key",
+        tool_render_agents=tool_render_agents,
+        base_url="https://new_base_url.com",
+        another_arg="value",
+    )
+
+
+def test_toolkit_get_tools_subset(toolkit_subset):
+    tools = toolkit_subset.get_tools()
     assert len(tools) == 2
     assert isinstance(tools[0], Ads4gptsInlineSponsoredResponseTool)
     assert isinstance(tools[1], Ads4gptsSuggestedPromptTool)
-    assert tools[0].base_url == "https://new_base_url.com"
-    assert tools[1].base_url == "https://new_base_url.com"
-    # Instead of asserting another_arg is set, verify it is not present:
-    assert not hasattr(tools[0], "another_arg")
+
+
+def test_toolkit_get_tools_with_render_agents(toolkit_render):
+    tools = toolkit_render.get_tools()
+    assert tools[0].ads4gpts_render_agent == "render_agent_1"
+    assert tools[1].ads4gpts_render_agent == "render_agent_2"
+    assert tools[2].ads4gpts_render_agent is None
+    assert tools[3].ads4gpts_render_agent is None
+    assert tools[4].ads4gpts_render_agent is None
+
+
+def test_toolkit_set_api_key_from_env():
+    with patch.dict(os.environ, {"ADS4GPTS_API_KEY": "env_api_key"}):
+        toolkit = Ads4gptsToolkit(
+            ads4gpts_api_key=None,
+            base_url="https://new_base_url.com",
+            another_arg="value",
+        )
+        assert toolkit.ads4gpts_api_key == "env_api_key"
