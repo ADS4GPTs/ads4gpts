@@ -267,67 +267,70 @@ class Ads4gptsSuggestedPromptTool(Ads4gptsBaseTool):
     """
     args_schema: Type[Ads4gptsSuggestedPromptInput] = Ads4gptsSuggestedPromptInput
 
-    class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
-        name: str = "ads4gpts_inline_conversational"
-        description: str = """
-            Tool for retrieving Inline Conversational ads that flow naturally within the conversation context.
 
-            Args:
-                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
-                user_gender (str): Gender of the user.
-                user_age (str): Age range of the user.
-                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
-                ad_recommendation (str): A free-text description of ads relevant to the user.
-                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
-                context (str): A summary of the context the ad is going to be in.
-                num_ads (int): Number of ads to retrieve. Defaults to 1.
-                style (str): The style description of the AI application, defaults to 'neutral'.
+class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_inline_conversational"
+    description: str = """
+        Tool for retrieving Inline Conversational ads that flow naturally within the conversation context.
 
-            Returns:
-                Union[Dict, List[Dict]]: A single ad or a list of conversational ads, each containing the ad creative and relevant metadata.
-        """
-        args_schema: Type[Ads4gptsInlineConversationalInput] = (
-            Ads4gptsInlineConversationalInput
-        )
+        Args:
+            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+            ad_recommendation (str): A free-text description of ads relevant to the user.
+            undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+            context (str): A summary of the context the ad is going to be in.
+            num_ads (int): Number of ads to retrieve. Defaults to 1.
+            style (str): The style description of the AI application, defaults to 'neutral'.
 
-    class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
-        name: str = "ads4gpts_inline_banner"
-        description: str = """
-            Tool for retrieving Inline Banner ads that can be displayed within the conversation interface.
+        Returns:
+            Union[Dict, List[Dict]]: A single ad or a list of conversational ads, each containing the ad creative and relevant metadata.
+    """
+    args_schema: Type[Ads4gptsInlineConversationalInput] = (
+        Ads4gptsInlineConversationalInput
+    )
 
-            Args:
-                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
-                user_gender (str): Gender of the user.
-                user_age (str): Age range of the user.
-                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
-                ad_recommendation (str): A free-text description of ads relevant to the user.
-                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
-                context (str): A summary of the context the ad is going to be in.
-                num_ads (int): Number of ads to retrieve. Defaults to 1.
-                style (str): The style description of the AI application, defaults to 'neutral'.
 
-            Returns:
-                Union[Dict, List[Dict]]: A single banner or a list of banner ads, each containing image URLs, ad copy, and CTA links.
-        """
-        args_schema: Type[Ads4gptsInlineBannerInput] = Ads4gptsInlineBannerInput
+class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_inline_banner"
+    description: str = """
+        Tool for retrieving Inline Banner ads that can be displayed within the conversation interface.
 
-    class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
-        name: str = "ads4gpts_suggested_banner"
-        description: str = """
-            Tool for retrieving Suggested Banner ads that can be recommended to users before or after a conversation.
+        Args:
+            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+            ad_recommendation (str): A free-text description of ads relevant to the user.
+            undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+            context (str): A summary of the context the ad is going to be in.
+            num_ads (int): Number of ads to retrieve. Defaults to 1.
+            style (str): The style description of the AI application, defaults to 'neutral'.
 
-            Args:
-                id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
-                user_gender (str): Gender of the user.
-                user_age (str): Age range of the user.
-                user_persona (str): A descriptive persona of the user based on their interests and behaviors.
-                ad_recommendation (str): A free-text description of ads relevant to the user.
-                undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
-                context (str): A summary of the context the ad is going to be in.
-                num_ads (int): Number of ads to retrieve. Defaults to 1.
-                style (str): The style description of the AI application, defaults to 'neutral'.
+        Returns:
+            Union[Dict, List[Dict]]: A single banner or a list of banner ads, each containing image URLs, ad copy, and CTA links.
+    """
+    args_schema: Type[Ads4gptsInlineBannerInput] = Ads4gptsInlineBannerInput
 
-            Returns:
-                Union[Dict, List[Dict]]: A single banner or a list of suggested banner ads to display alongside the conversation.
-        """
-        args_schema: Type[Ads4gptsSuggestedBannerInput] = Ads4gptsSuggestedBannerInput
+
+class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_suggested_banner"
+    description: str = """
+        Tool for retrieving Suggested Banner ads that can be recommended to users before or after a conversation.
+
+        Args:
+            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+            ad_recommendation (str): A free-text description of ads relevant to the user.
+            undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+            context (str): A summary of the context the ad is going to be in.
+            num_ads (int): Number of ads to retrieve. Defaults to 1.
+            style (str): The style description of the AI application, defaults to 'neutral'.
+
+        Returns:
+            Union[Dict, List[Dict]]: A single banner or a list of suggested banner ads to display alongside the conversation.
+    """
+    args_schema: Type[Ads4gptsSuggestedBannerInput] = Ads4gptsSuggestedBannerInput

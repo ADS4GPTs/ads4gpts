@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ads4gpts-langchain"
-version = "0.1.8"
+version = "0.1.9"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = ["ADS4GPTs"]
 license = "GNU AGPLv3"
@@ -25,13 +25,14 @@ langchain-openai = "^0.2.7"
 pytest = "^8.3.4"
 pytest-asyncio = "^0.25.3"
 toml = "^0.10.2"
+python-dotenv = "^1.0.1"
 
 [project]
 name = "ads4gpts-langchain"
-version = "0.1.8"
+version = "0.1.9"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = [{ name = "Ioannis Bakagiannis", email = "contact@ads4gpts.com" }]
-license = { "file" = "LICENSE" }
+license = "GNU AGPLv3"
 readme = "README.md"
 keywords = ["ads", "GPT", "LLM", "freemium", "AI"]
 classifiers = [
