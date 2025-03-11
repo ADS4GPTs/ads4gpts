@@ -1,11 +1,14 @@
 import os
 import logging
-from typing import Any, Dict, Union, List, Optional, Type, Literal
+from typing import Any, Dict, Union, List, Optional, Type, Literal, Annotated
 
 from pydantic import BaseModel, Field, model_validator
 from enum import Enum
 from langchain_core.tools import BaseTool
 from ads4gpts_langchain.utils import get_from_dict_or_env, get_ads, async_get_ads
+from langgraph.types import Command
+from langchain_core.tools.base import InjectedToolCallId
+from langchain_core.messages import ToolMessage
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -58,6 +61,9 @@ class Ads4gptsBaseInput(BaseModel):
     style: str = Field(
         default="neutral",
         description="The style description of the AI application, defaults to 'neutral'.",
+    )
+    tool_call_id: Annotated[str, InjectedToolCallId] = Field(
+        ..., description="The unique identifier for the tool call."
     )
 
     @model_validator(mode="before")
@@ -145,6 +151,10 @@ class Ads4gptsBaseTool(BaseTool):
     ads_endpoint: str = Field(
         default="api/v1/ads/", description="Endpoint path for retrieving ads."
     )
+    ads4gpts_render_agent: Optional[str] = Field(
+        default=None,
+        description="The render agent to use for rendering ads. Defaults to None.",
+    )
     args_schema: Type[Ads4gptsBaseInput] = Ads4gptsBaseInput
 
     @model_validator(mode="before")
@@ -165,7 +175,24 @@ class Ads4gptsBaseTool(BaseTool):
             url = f"{self.base_url}{self.ads_endpoint}"
             headers = {"Authorization": f"Bearer {self.ads4gpts_api_key}"}
             payload = validated_args.model_dump()
-            return get_ads(url=url, headers=headers, payload=payload)
+            tool_call_id = payload.pop("tool_call_id", None)
+            if self.ads4gpts_render_agent:
+                return Command(
+                    goto=self.ads4gpts_render_agent,
+                    update={
+                        "messages": [
+                            ToolMessage(
+                                content=get_ads(
+                                    url=url, headers=headers, payload=payload
+                                ),
+                                name=self.name,
+                                tool_call_id=tool_call_id,
+                            )
+                        ]
+                    },
+                )
+            else:
+                return get_ads(url=url, headers=headers, payload=payload)
         except Exception as e:
             logger.error(f"An error occurred in _run: {e}")
             return {"error": str(e)}
@@ -177,7 +204,23 @@ class Ads4gptsBaseTool(BaseTool):
             url = f"{self.base_url}{self.ads_endpoint}"
             headers = {"Authorization": f"Bearer {self.ads4gpts_api_key}"}
             payload = validated_args.model_dump()
-            return await async_get_ads(url=url, headers=headers, payload=payload)
+            tool_call_id = payload.pop("tool_call_id", None)
+            ads = await async_get_ads(url=url, headers=headers, payload=payload)
+            if self.ads4gpts_render_agent:
+                return Command(
+                    goto=self.ads4gpts_render_agent,
+                    update={
+                        "messages": [
+                            ToolMessage(
+                                content=ads,
+                                name=self.name,
+                                tool_call_id=tool_call_id,
+                            )
+                        ]
+                    },
+                )
+            else:
+                return ads
         except Exception as e:
             logger.error(f"An error occurred in _arun: {e}")
             return {"error": str(e)}
