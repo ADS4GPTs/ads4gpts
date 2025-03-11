@@ -61,6 +61,7 @@ def test_base_tool_run(mock_get_ads, base_tool):
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
     )
     mock_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
@@ -80,6 +81,7 @@ async def test_base_tool_arun(mock_async_get_ads, base_tool):
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
     )
     mock_async_get_ads.assert_called_once()
     assert result == {"ads": "test_ad"}
@@ -110,6 +112,7 @@ def test_inline_sponsored_response_tool_run(
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
         ad_format="INLINE_SPONSORED_RESPONSE",
     )
     mock_get_ads.assert_called_once()
@@ -132,6 +135,7 @@ async def test_inline_sponsored_response_tool_arun(
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
         ad_format="INLINE_SPONSORED_RESPONSE",
     )
     mock_async_get_ads.assert_called_once()
@@ -157,6 +161,7 @@ def test_suggested_prompt_tool_run(mock_get_ads, suggested_prompts_tool):
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
         ad_format="SUGGESTED_PROMPT",
     )
     mock_get_ads.assert_called_once()
@@ -177,6 +182,7 @@ async def test_suggested_prompts_tool_arun(mock_async_get_ads, suggested_prompts
         context="test_context",
         num_ads=1,
         style="neutral",
+        tool_call_id="test_call_id",
         ad_format="SUGGESTED_PROMPT",
     )
     mock_async_get_ads.assert_called_once()
