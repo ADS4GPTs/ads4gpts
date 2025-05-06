@@ -58,9 +58,14 @@ class Ads4gptsBaseInput(BaseModel):
     num_ads: int = Field(
         default=1, ge=1, description="Number of ads to retrieve (must be >= 1)."
     )
-    style: str = Field(
-        default="neutral",
-        description="The style description of the AI application, defaults to 'neutral'.",
+    min_bid: float = Field(
+        default=0.01,
+        ge=0.01,
+        description="Minimum bid for the ad placement (must be >= 0.01).",
+    )
+    session_id: Optional[str] = Field(
+        default=None,
+        description="Session ID for tracking purposes.",
     )
     tool_call_id: Annotated[str, InjectedToolCallId] = Field(
         ..., description="The unique identifier for the tool call."
