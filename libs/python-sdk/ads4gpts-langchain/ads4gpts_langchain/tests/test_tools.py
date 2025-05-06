@@ -64,7 +64,8 @@ def test_base_tool_run(mock_get_ads, base_tool):
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
-        style="neutral",
+        min_bid=0.5,
+        session_id="test_session",
         tool_call_id="test_call_id",
     )
     mock_get_ads.assert_called_once()
@@ -84,7 +85,8 @@ async def test_base_tool_arun(mock_async_get_ads, base_tool):
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
-        style="neutral",
+        min_bid=0.5,
+        session_id="test_session",
         tool_call_id="test_call_id",
     )
     mock_async_get_ads.assert_called_once()
@@ -115,7 +117,8 @@ def test_inline_sponsored_response_tool_run(
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
-        style="neutral",
+        min_bid=0.5,
+        session_id="test_session",
         tool_call_id="test_call_id",
         ad_format="INLINE_SPONSORED_RESPONSE",
     )
@@ -138,7 +141,8 @@ async def test_inline_sponsored_response_tool_arun(
         undesired_ads="test_undesired_ads",
         context="test_context",
         num_ads=1,
-        style="neutral",
+        min_bid=0.5,
+        session_id="test_session",
         tool_call_id="test_call_id",
         ad_format="INLINE_SPONSORED_RESPONSE",
     )

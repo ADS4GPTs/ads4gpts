@@ -71,16 +71,20 @@ def get_ads(
         response = session.post(url, json=payload, headers=headers, timeout=10)
         response.raise_for_status()
         response_json = response.json()
-        if isinstance(response_json["data"]["ads"], dict):
-            return response_json["data"]["ads"]
-        elif isinstance(response_json["data"]["ads"], list):
-            return (
-                response_json["data"]["ads"]
-                if payload["num_ads"] > 1
-                else response_json["data"]["ads"][0]
-            )
-        else:
-            return {"error": "Returned object is not a Dictionary or Array"}
+
+        if "status" in response_json and response_json["status"] == "success":
+            if "advertiser_agents" in response_json:
+                return {"advertiser_agents": response_json["advertiser_agents"]}
+            else:
+                return {"error": "No advertiser_agents found in response"}
+        elif "status" in response_json and response_json["status"] == "error":
+            error_msg = "Unknown error"
+            if "error" in response_json:
+                error = response_json["error"]
+                error_msg = error.get("message", "Unknown error")
+            return {"error": error_msg}
+
+        return {"error": "Unexpected response format"}
     except requests.exceptions.HTTPError as http_err:
         logger.error(f"HTTP error: {http_err}")
         return {"error": str(http_err)}
@@ -109,16 +113,20 @@ async def async_get_ads(
                 )
                 response.raise_for_status()
                 response_json = response.json()
-                if isinstance(response_json["data"]["ads"], dict):
-                    return response_json["data"]["ads"]
-                elif isinstance(response_json["data"]["ads"], list):
-                    return (
-                        response_json["data"]["ads"]
-                        if payload["num_ads"] > 1
-                        else response_json["data"]["ads"][0]
-                    )
-                else:
-                    return {"error": "Returned object is not a Dictionary or Array"}
+
+                if "status" in response_json and response_json["status"] == "success":
+                    if "advertiser_agents" in response_json:
+                        return {"advertiser_agents": response_json["advertiser_agents"]}
+                    else:
+                        return {"error": "No advertiser_agents found in response"}
+                elif "status" in response_json and response_json["status"] == "error":
+                    error_msg = "Unknown error"
+                    if "error" in response_json:
+                        error = response_json["error"]
+                        error_msg = error.get("message", "Unknown error")
+                    return {"error": error_msg}
+
+                return {"error": "Unexpected response format"}
             except httpx.HTTPStatusError as http_err:
                 logger.error(
                     f"HTTP error on attempt {attempt} of {max_retries}: {http_err}"

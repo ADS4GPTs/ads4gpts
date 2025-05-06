@@ -32,7 +32,7 @@ name = "ads4gpts-langchain"
 version = "0.1.9"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = [{ name = "Ioannis Bakagiannis", email = "contact@ads4gpts.com" }]
-license = "GNU AGPLv3"
+license = { "file" = "LICENSE" }
 readme = "README.md"
 keywords = ["ads", "GPT", "LLM", "freemium", "AI"]
 classifiers = [
