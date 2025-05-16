@@ -8,6 +8,7 @@ from ads4gpts_langchain.tools import (
     Ads4gptsInlineBannerTool,
     Ads4gptsSuggestedBannerTool,
     Ads4gptsBaseTool,
+    Ads4gptsReferralTool,  # Add import for Ads4gptsReferralTool
 )
 from ads4gpts_langchain.toolkit import Ads4gptsToolkit
 
@@ -57,7 +58,7 @@ def test_base_tool_run(mock_get_ads, base_tool):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = base_tool._run(
         id="test_id",
-        user_gender="female",
+        user_gender="FEMALE",  # updated from "female"
         user_age="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
@@ -78,7 +79,7 @@ async def test_base_tool_arun(mock_async_get_ads, base_tool):
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await base_tool._arun(
         id="test_id",
-        user_gender="female",
+        user_gender="FEMALE",  # updated from "female"
         user_age="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
@@ -110,7 +111,7 @@ def test_inline_sponsored_response_tool_run(
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = inline_sponsored_response_tool._run(
         id="test_id",
-        user_gender="female",
+        user_gender="FEMALE",  # updated from "female"
         user_age="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
@@ -134,7 +135,7 @@ async def test_inline_sponsored_response_tool_arun(
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await inline_sponsored_response_tool._arun(
         id="test_id",
-        user_gender="female",
+        user_gender="FEMALE",  # updated from "female"
         user_age="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
@@ -164,23 +165,28 @@ def test_toolkit_initialization(toolkit):
 
 def test_toolkit_get_tools(toolkit):
     tools = toolkit.get_tools()
-    assert len(tools) == 5
+    assert len(tools) == 6  # Updated from 6 to include referral tool
     assert isinstance(tools[0], Ads4gptsInlineSponsoredResponseTool)
     assert isinstance(tools[1], Ads4gptsSuggestedPromptTool)
     assert isinstance(tools[2], Ads4gptsInlineConversationalTool)
     assert isinstance(tools[3], Ads4gptsInlineBannerTool)
     assert isinstance(tools[4], Ads4gptsSuggestedBannerTool)
+    assert isinstance(tools[5], Ads4gptsReferralTool)  # Added check for referral tool
     assert tools[0].base_url == "https://new_base_url.com"
     assert tools[1].base_url == "https://new_base_url.com"
     assert tools[2].base_url == "https://new_base_url.com"
     assert tools[3].base_url == "https://new_base_url.com"
     assert tools[4].base_url == "https://new_base_url.com"
+    assert (
+        tools[5].base_url == "https://new_base_url.com"
+    )  # Added check for referral tool
     # Instead of asserting another_arg is set, verify it is not present:
     assert not hasattr(tools[0], "another_arg")
     assert not hasattr(tools[1], "another_arg")
     assert not hasattr(tools[2], "another_arg")
     assert not hasattr(tools[3], "another_arg")
     assert not hasattr(tools[4], "another_arg")
+    assert not hasattr(tools[5], "another_arg")  # Added check for referral tool
 
 
 @pytest.fixture
@@ -188,6 +194,7 @@ def toolkit_subset():
     tools = [
         "ads4gpts_inline_sponsored_response",
         "ads4gpts_suggested_prompt",
+        "ads4gpts_referral",  # Added referral tool
     ]
     return Ads4gptsToolkit(
         ads4gpts_api_key="test_api_key",
@@ -202,6 +209,7 @@ def toolkit_render():
     tool_render_agents = {
         "ads4gpts_inline_sponsored_response": "render_agent_1",
         "ads4gpts_suggested_prompt": "render_agent_2",
+        "ads4gpts_referral": "render_agent_3",  # Added referral tool render agent
     }
     return Ads4gptsToolkit(
         ads4gpts_api_key="test_api_key",
@@ -213,9 +221,10 @@ def toolkit_render():
 
 def test_toolkit_get_tools_subset(toolkit_subset):
     tools = toolkit_subset.get_tools()
-    assert len(tools) == 2
+    assert len(tools) == 3  # Updated from 2 to include referral tool
     assert isinstance(tools[0], Ads4gptsInlineSponsoredResponseTool)
     assert isinstance(tools[1], Ads4gptsSuggestedPromptTool)
+    assert isinstance(tools[2], Ads4gptsReferralTool)  # Added check for referral tool
 
 
 def test_toolkit_get_tools_with_render_agents(toolkit_render):
@@ -225,6 +234,9 @@ def test_toolkit_get_tools_with_render_agents(toolkit_render):
     assert tools[2].ads4gpts_render_agent is None
     assert tools[3].ads4gpts_render_agent is None
     assert tools[4].ads4gpts_render_agent is None
+    assert (
+        tools[5].ads4gpts_render_agent == "render_agent_3"
+    )  # Added check for referral tool render agent
 
 
 def test_toolkit_set_api_key_from_env():
@@ -235,3 +247,60 @@ def test_toolkit_set_api_key_from_env():
             another_arg="value",
         )
         assert toolkit.ads4gpts_api_key == "env_api_key"
+
+
+@pytest.fixture
+def referral_tool():
+    return Ads4gptsReferralTool(
+        ads4gpts_api_key="test_api_key",
+        base_url="https://ads-api-fp3g.onrender.com/",
+    )
+
+
+def test_referral_tool_initialization(referral_tool):
+    assert referral_tool.ads4gpts_api_key == "test_api_key"
+    assert referral_tool.base_url == "https://ads-api-fp3g.onrender.com/"
+    assert referral_tool.ads_endpoint == "api/v1/ads/"
+
+
+@patch("ads4gpts_langchain.tools.get_ads")
+def test_referral_tool_run(mock_get_ads, referral_tool):
+    mock_get_ads.return_value = {"ads": "test_ad"}
+    result = referral_tool._run(
+        id="test_id",
+        user_gender="FEMALE",
+        user_age="25-34",
+        user_persona="test_persona",
+        ad_recommendation="test_recommendation",
+        undesired_ads="test_undesired_ads",
+        context="test_context",
+        num_ads=1,
+        min_bid=0.5,
+        session_id="test_session",
+        tool_call_id="test_call_id",
+        ad_format="REFERRAL",
+    )
+    mock_get_ads.assert_called_once()
+    assert result == {"ads": "test_ad"}
+
+
+@patch("ads4gpts_langchain.tools.async_get_ads")
+@pytest.mark.asyncio
+async def test_referral_tool_arun(mock_async_get_ads, referral_tool):
+    mock_async_get_ads.return_value = {"ads": "test_ad"}
+    result = await referral_tool._arun(
+        id="test_id",
+        user_gender="FEMALE",
+        user_age="25-34",
+        user_persona="test_persona",
+        ad_recommendation="test_recommendation",
+        undesired_ads="test_undesired_ads",
+        context="test_context",
+        num_ads=1,
+        min_bid=0.5,
+        session_id="test_session",
+        tool_call_id="test_call_id",
+        ad_format="REFERRAL",
+    )
+    mock_async_get_ads.assert_called_once()
+    assert result == {"ads": "test_ad"}
