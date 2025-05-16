@@ -12,7 +12,7 @@ from ads4gpts_langchain.tools import (
     Ads4gptsInlineConversationalTool,
     Ads4gptsInlineBannerTool,
     Ads4gptsSuggestedBannerTool,
-    Ads4gptsReferralTool,
+    Ads4gptsInlineReferralTool,
 )
 from dotenv import load_dotenv
 
@@ -50,7 +50,7 @@ class Ads4gptsToolkit(BaseToolkit):
         Ads4gptsInlineConversationalTool,
         Ads4gptsInlineBannerTool,
         Ads4gptsSuggestedBannerTool,
-        Ads4gptsReferralTool,
+        Ads4gptsInlineReferralTool,
     ]
 
     def __init__(

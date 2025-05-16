@@ -107,7 +107,7 @@ class AdFormat(str, Enum):
     INLINE_CONVERSATIONAL = "INLINE_CONVERSATIONAL"
     INLINE_BANNER = "INLINE_BANNER"
     SUGGESTED_BANNER = "SUGGESTED_BANNER"
-    REFERRAL = "REFERRAL"
+    INLINE_REFERRAL = "INLINE_REFERRAL"
 
 
 class Ads4gptsInlineSponsoredResponseInput(Ads4gptsBaseInput):
@@ -140,10 +140,10 @@ class Ads4gptsSuggestedBannerInput(Ads4gptsBaseInput):
     ad_format: AdFormat = AdFormat.SUGGESTED_BANNER
 
 
-class Ads4gptsReferralInput(Ads4gptsBaseInput):
-    """Input schema for Ads4gptsReferralTool."""
+class Ads4gptsInlineReferralInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsInlineReferralTool."""
 
-    ad_format: AdFormat = AdFormat.REFERRAL
+    ad_format: AdFormat = AdFormat.INLINE_REFERRAL
 
 
 class Ads4gptsBaseTool(BaseTool):
@@ -367,10 +367,10 @@ class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
     args_schema: Type[Ads4gptsSuggestedBannerInput] = Ads4gptsSuggestedBannerInput
 
 
-class Ads4gptsReferralTool(Ads4gptsBaseTool):
-    name: str = "ads4gpts_referral"
+class Ads4gptsInlineReferralTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_inline_referral"
     description: str = """
-        Tool for retrieving Referral ads that can be used to recommend products or services based on user conversations.
+        Tool for retrieving Inline Referral ads that can be used to recommend products or services based on user conversations.
 
         Args:
             id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
@@ -387,4 +387,4 @@ class Ads4gptsReferralTool(Ads4gptsBaseTool):
         Returns:
             Dict: Contains the "advertiser_agents" key with a list of ads.
     """
-    args_schema: Type[Ads4gptsReferralInput] = Ads4gptsReferralInput
+    args_schema: Type[Ads4gptsInlineReferralInput] = Ads4gptsInlineReferralInput
