@@ -28,21 +28,21 @@ class Ads4gptsBaseInput(BaseModel):
         ...,
         description="Unique identifier for the session or user (hashed or anonymized to ensure privacy).",
     )
-    user_gender: Literal["male", "female", "non_binary", "undisclosed"] = Field(
-        default="undisclosed", description="Gender of the user."
+    user_gender: Literal["MALE", "FEMALE", "OTHER", "UNDISCLOSED"] = Field(
+        default="UNDISCLOSED", description="Gender of the user."
     )
     user_age: Literal[
-        "under_18",
+        "UNDER_18",
         "18-24",
         "25-34",
         "35-44",
         "45-54",
         "55-64",
-        "65_over",
-        "undisclosed",
-    ] = Field(default="undisclosed", description="Age range of the user.")
+        "65_OVER",
+        "UNDISCLOSED",
+    ] = Field(default="UNDISCLOSED", description="Age range of the user.")
     user_persona: str = Field(
-        default="undisclosed",
+        default="UNDISCLOSED",
         description="A descriptive persona of the user based on their interests and behaviors.",
     )
     ad_recommendation: str = Field(
@@ -77,16 +77,16 @@ class Ads4gptsBaseInput(BaseModel):
         gender = values.get("user_gender")
         age_range = values.get("user_age")
 
-        valid_genders = {"male", "female", "non_binary", "undisclosed"}
+        valid_genders = {"MALE", "FEMALE", "OTHER", "UNDISCLOSED"}
         valid_age_ranges = {
-            "under_18",
+            "UNDER_18",
             "18-24",
             "25-34",
             "35-44",
             "45-54",
             "55-64",
-            "65_over",
-            "undisclosed",
+            "65_OVER",
+            "UNDISCLOSED",
         }
 
         if gender not in valid_genders:
@@ -107,6 +107,7 @@ class AdFormat(str, Enum):
     INLINE_CONVERSATIONAL = "INLINE_CONVERSATIONAL"
     INLINE_BANNER = "INLINE_BANNER"
     SUGGESTED_BANNER = "SUGGESTED_BANNER"
+    REFERRAL = "REFERRAL"
 
 
 class Ads4gptsInlineSponsoredResponseInput(Ads4gptsBaseInput):
@@ -137,6 +138,12 @@ class Ads4gptsSuggestedBannerInput(Ads4gptsBaseInput):
     """Input schema for Ads4gptsSuggestedBannerTool."""
 
     ad_format: AdFormat = AdFormat.SUGGESTED_BANNER
+
+
+class Ads4gptsReferralInput(Ads4gptsBaseInput):
+    """Input schema for Ads4gptsReferralTool."""
+
+    ad_format: AdFormat = AdFormat.REFERRAL
 
 
 class Ads4gptsBaseTool(BaseTool):
@@ -238,15 +245,18 @@ class Ads4gptsInlineSponsoredResponseTool(Ads4gptsBaseTool):
 
         Args:
             id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
-            user (Dict[Literal["gender", "age_range", "persona"], str]): User attributes of gender, age_range, and persona.
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
             ad_recommendation (str): A free-text description of ads relevant to the user.
             undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
             context (str): A summary of the context the ad is going to be in.
-            num_ads (int): Number of ads to retrieve. Defaults to 1.
-            style (str): The style description of the AI application, defaults to 'neutral'.
+            num_ads (int): Number of ads to retrieve (must be >= 1).
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
 
         Returns:
-            Union[Dict, List[Dict]]: A single ad or a list of ads, each containing the ad creative, ad header, ad copy, and CTA link.
+            Dict: Contains the "advertiser_agents" key with a list of ads.
     """
     args_schema: Type[Ads4gptsInlineSponsoredResponseInput] = (
         Ads4gptsInlineSponsoredResponseInput
@@ -260,15 +270,18 @@ class Ads4gptsSuggestedPromptTool(Ads4gptsBaseTool):
 
         Args:
             id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
-            user (Dict[Literal["gender", "age_range", "persona"], str]): User attributes of gender, age_range, and persona.
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
             ad_recommendation (str): A free-text description of ads relevant to the user.
             undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
             context (str): A summary of the context the ad is going to be in.
-            num_ads (int): Number of ads to retrieve. Defaults to 1.
-            style (str): The style description of the AI application, defaults to 'neutral'.
+            num_ads (int): Number of ads to retrieve (must be >= 1).
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
 
         Returns:
-            Union[Dict, List[Dict]]: A single prompt or a list of suggested prompts, each containing the ad creative, ad header, ad copy, and CTA link.
+            Dict: Contains the "advertiser_agents" key with a list of ads.
     """
     args_schema: Type[Ads4gptsSuggestedPromptInput] = Ads4gptsSuggestedPromptInput
 
@@ -286,15 +299,26 @@ class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
             ad_recommendation (str): A free-text description of ads relevant to the user.
             undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
             context (str): A summary of the context the ad is going to be in.
-            num_ads (int): Number of ads to retrieve. Defaults to 1.
-            style (str): The style description of the AI application, defaults to 'neutral'.
+            num_ads (int): Number of ads to retrieve. Hard set to 1 for this format.
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
 
         Returns:
-            Union[Dict, List[Dict]]: A single ad or a list of conversational ads, each containing the ad creative and relevant metadata.
+            Dict: Contains the "advertiser_agents" key with a list of ads.
     """
     args_schema: Type[Ads4gptsInlineConversationalInput] = (
         Ads4gptsInlineConversationalInput
     )
+
+    def _run(self, **kwargs) -> Dict:
+        kwargs["num_ads"] = 1  # Force num_ads to be 1
+        ads = super()._run(**kwargs)
+        return {"advertiser_agents": ads}
+
+    async def _arun(self, **kwargs) -> Dict:
+        kwargs["num_ads"] = 1  # Force num_ads to be 1
+        ads = await super()._arun(**kwargs)
+        return {"advertiser_agents": ads}
 
 
 class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
@@ -310,11 +334,12 @@ class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
             ad_recommendation (str): A free-text description of ads relevant to the user.
             undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
             context (str): A summary of the context the ad is going to be in.
-            num_ads (int): Number of ads to retrieve. Defaults to 1.
-            style (str): The style description of the AI application, defaults to 'neutral'.
+            num_ads (int): Number of ads to retrieve (must be >= 1).
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
 
         Returns:
-            Union[Dict, List[Dict]]: A single banner or a list of banner ads, each containing image URLs, ad copy, and CTA links.
+            Dict: Contains the "advertiser_agents" key with a list of ads.
     """
     args_schema: Type[Ads4gptsInlineBannerInput] = Ads4gptsInlineBannerInput
 
@@ -332,10 +357,34 @@ class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
             ad_recommendation (str): A free-text description of ads relevant to the user.
             undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
             context (str): A summary of the context the ad is going to be in.
-            num_ads (int): Number of ads to retrieve. Defaults to 1.
-            style (str): The style description of the AI application, defaults to 'neutral'.
+            num_ads (int): Number of ads to retrieve (must be >= 1).
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
 
         Returns:
-            Union[Dict, List[Dict]]: A single banner or a list of suggested banner ads to display alongside the conversation.
+            Dict: Contains the "advertiser_agents" key with a list of ads.
     """
     args_schema: Type[Ads4gptsSuggestedBannerInput] = Ads4gptsSuggestedBannerInput
+
+
+class Ads4gptsReferralTool(Ads4gptsBaseTool):
+    name: str = "ads4gpts_referral"
+    description: str = """
+        Tool for retrieving Referral ads that can be used to recommend products or services based on user conversations.
+
+        Args:
+            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            user_gender (str): Gender of the user.
+            user_age (str): Age range of the user.
+            user_persona (str): A descriptive persona of the user based on their interests and behaviors.
+            ad_recommendation (str): A free-text description of ads relevant to the user.
+            undesired_ads (str): A free-text or enumerated reference to ads the user does not wish to see.
+            context (str): A summary of the context the ad is going to be in.
+            num_ads (int): Number of ads to retrieve (must be >= 1).
+            min_bid (float): Minimum bid for the ad placement (must be >= 0.01).
+            session_id (Optional[str]): Session ID for tracking purposes.
+
+        Returns:
+            Dict: Contains the "advertiser_agents" key with a list of ads.
+    """
+    args_schema: Type[Ads4gptsReferralInput] = Ads4gptsReferralInput
