@@ -127,6 +127,13 @@ class Ads4gptsInlineConversationalInput(Ads4gptsBaseInput):
 
     ad_format: AdFormat = AdFormat.INLINE_CONVERSATIONAL
 
+    @model_validator(mode="before")
+    def validate_num_ads(cls, values):
+        num_ads = values.get("num_ads")
+        if num_ads != 1:
+            raise ValueError("num_ads must be exactly 1 for Inline Conversational ads.")
+        return values
+
 
 class Ads4gptsInlineBannerInput(Ads4gptsBaseInput):
     """Input schema for Ads4gptsInlineBannerTool."""
@@ -309,16 +316,6 @@ class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
     args_schema: Type[Ads4gptsInlineConversationalInput] = (
         Ads4gptsInlineConversationalInput
     )
-
-    def _run(self, **kwargs) -> Dict:
-        kwargs["num_ads"] = 1  # Force num_ads to be 1
-        ads = super()._run(**kwargs)
-        return {"advertiser_agents": ads}
-
-    async def _arun(self, **kwargs) -> Dict:
-        kwargs["num_ads"] = 1  # Force num_ads to be 1
-        ads = await super()._arun(**kwargs)
-        return {"advertiser_agents": ads}
 
 
 class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
