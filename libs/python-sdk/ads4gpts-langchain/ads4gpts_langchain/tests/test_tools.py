@@ -59,7 +59,7 @@ def test_base_tool_run(mock_get_ads, base_tool):
     result = base_tool._run(
         id="test_id",
         user_gender="FEMALE",  # updated from "female"
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
@@ -80,7 +80,7 @@ async def test_base_tool_arun(mock_async_get_ads, base_tool):
     result = await base_tool._arun(
         id="test_id",
         user_gender="FEMALE",  # updated from "female"
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
@@ -112,7 +112,7 @@ def test_inline_sponsored_response_tool_run(
     result = inline_sponsored_response_tool._run(
         id="test_id",
         user_gender="FEMALE",  # updated from "female"
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
@@ -136,7 +136,7 @@ async def test_inline_sponsored_response_tool_arun(
     result = await inline_sponsored_response_tool._arun(
         id="test_id",
         user_gender="FEMALE",  # updated from "female"
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
@@ -265,7 +265,7 @@ def test_referral_tool_run(mock_get_ads, referral_tool):
     result = referral_tool._run(
         id="test_id",
         user_gender="FEMALE",
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",
@@ -287,7 +287,7 @@ async def test_referral_tool_arun(mock_async_get_ads, referral_tool):
     result = await referral_tool._arun(
         id="test_id",
         user_gender="FEMALE",
-        user_age="25-34",
+        user_age_range="25-34",
         user_persona="test_persona",
         ad_recommendation="test_recommendation",
         undesired_ads="test_undesired_ads",

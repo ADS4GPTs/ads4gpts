@@ -31,16 +31,9 @@ class Ads4gptsBaseInput(BaseModel):
     user_gender: Literal["MALE", "FEMALE", "OTHER", "UNDISCLOSED"] = Field(
         default="UNDISCLOSED", description="Gender of the user."
     )
-    user_age: Literal[
-        "UNDER_18",
-        "18-24",
-        "25-34",
-        "35-44",
-        "45-54",
-        "55-64",
-        "65_OVER",
-        "UNDISCLOSED",
-    ] = Field(default="UNDISCLOSED", description="Age range of the user.")
+    user_age_range: str = Field(
+        default="UNDISCLOSED", description="Age range of the user."
+    )
     user_persona: str = Field(
         default="UNDISCLOSED",
         description="A descriptive persona of the user based on their interests and behaviors.",
@@ -75,27 +68,12 @@ class Ads4gptsBaseInput(BaseModel):
     def validate_user(cls, values):
         """Validate user fields to ensure they contain valid values."""
         gender = values.get("user_gender")
-        age_range = values.get("user_age")
 
         valid_genders = {"MALE", "FEMALE", "OTHER", "UNDISCLOSED"}
-        valid_age_ranges = {
-            "UNDER_18",
-            "18-24",
-            "25-34",
-            "35-44",
-            "45-54",
-            "55-64",
-            "65_OVER",
-            "UNDISCLOSED",
-        }
 
         if gender not in valid_genders:
             raise ValueError(
                 f"Invalid gender value: {gender}. Must be one of {valid_genders}"
-            )
-        if age_range not in valid_age_ranges:
-            raise ValueError(
-                f"Invalid age_range value: {age_range}. Must be one of {valid_age_ranges}"
             )
 
         return values
