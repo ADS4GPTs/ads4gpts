@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ads4gpts-langchain"
-version = "0.1.14"
+version = "0.1.15"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = ["ADS4GPTs"]
 license = "GNU AGPLv3"
@@ -29,7 +29,7 @@ python-dotenv = "^1.0.1"
 
 [project]
 name = "ads4gpts-langchain"
-version = "0.1.14"
+version = "0.1.15"
 description = "Ads for AI applications. Enabling the Freemium model for the AI era."
 authors = [{ name = "Ioannis Bakagiannis", email = "contact@ads4gpts.com" }]
 license = { "file" = "LICENSE" }
