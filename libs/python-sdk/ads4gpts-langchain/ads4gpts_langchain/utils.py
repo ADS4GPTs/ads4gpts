@@ -32,16 +32,11 @@ def get_from_dict_or_env(
     return get_from_env(key, env_key, default)
 
 
-import os
 import logging
-from typing import Any, Dict, Union, List, Optional, Type
-
 import requests
 import httpx
 import asyncio
-from pydantic import BaseModel, Field, root_validator
-from langchain_core.tools import BaseTool
-from ads4gpts_langchain.utils import get_from_dict_or_env
+
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -54,12 +49,17 @@ handler.setFormatter(formatter)
 
 
 def get_ads(
-    url: str, headers: Dict[str, str], payload: Dict[str, Any]
-) -> Union[Dict, List[Dict]]:
+    url: str,
+    headers: Dict[str, str],
+    payload: Dict[str, Any],
+    num_retries: int = 3,
+    backoff_factor: float = 0.2,
+    timeout: float = 10.0,
+) -> Dict:
     session = requests.Session()
     retries = requests.adapters.Retry(
-        total=5,
-        backoff_factor=0.2,
+        total=num_retries,
+        backoff_factor=backoff_factor,
         status_forcelist=[500, 502, 503, 504],
         allowed_methods=["POST"],
     )
@@ -68,20 +68,18 @@ def get_ads(
     session.mount("https://", adapter)
 
     try:
-        response = session.post(url, json=payload, headers=headers, timeout=10)
+        response = session.post(url, json=payload, headers=headers, timeout=timeout)
         response.raise_for_status()
         response_json = response.json()
-
-        if "status" in response_json and response_json["status"] == "success":
-            if "advertiser_agents" in response_json:
-                return {"advertiser_agents": response_json["advertiser_agents"]}
-            else:
-                return {"error": "No advertiser_agents found in response"}
-        elif "status" in response_json and response_json["status"] == "error":
-            error_msg = "Unknown error"
-            if "error" in response_json:
-                error = response_json["error"]
-                error_msg = error.get("message", "Unknown error")
+        payload = response_json.get("payload", {})
+        status = payload.get("status", None)
+        if status == "success":
+            advertiser_agents = payload.get("data", {}).get("advertiser_agents", None)
+            if advertiser_agents:
+                return {"advertiser_agents": advertiser_agents}
+            return {"error": "No advertiser_agents found in response data"}
+        elif status == "error":
+            error_msg = payload.get("error", {}).get("message", "Unknown error")
             return {"error": error_msg}
 
         return {"error": "Unexpected response format"}
@@ -99,46 +97,50 @@ def get_ads(
 
 
 async def async_get_ads(
-    url: str, headers: Dict[str, str], payload: Dict[str, Any]
-) -> Union[Dict, List[Dict]]:
+    url: str,
+    headers: Dict[str, str],
+    payload: Dict[str, Any],
+    num_retries: int = 3,
+    backoff_factor: float = 0.2,
+    timeout: float = 10.0,
+) -> Dict:
     """Fetch ads asynchronously with manual retry mechanism."""
-    max_retries = 5
-    backoff_factor = 0.2
 
     async with httpx.AsyncClient() as client:
-        for attempt in range(1, max_retries + 1):
+        for attempt in range(1, num_retries + 1):
             try:
                 response = await client.post(
-                    url, json=payload, headers=headers, timeout=10.0
+                    url, json=payload, headers=headers, timeout=timeout
                 )
                 response.raise_for_status()
                 response_json = response.json()
 
-                if "status" in response_json and response_json["status"] == "success":
-                    if "advertiser_agents" in response_json:
-                        return {"advertiser_agents": response_json["advertiser_agents"]}
-                    else:
-                        return {"error": "No advertiser_agents found in response"}
-                elif "status" in response_json and response_json["status"] == "error":
-                    error_msg = "Unknown error"
-                    if "error" in response_json:
-                        error = response_json["error"]
-                        error_msg = error.get("message", "Unknown error")
+                payload = response_json.get("payload", {})
+                status = payload.get("status", None)
+                if status == "success":
+                    advertiser_agents = payload.get("data", {}).get(
+                        "advertiser_agents", None
+                    )
+                    if advertiser_agents:
+                        return {"advertiser_agents": advertiser_agents}
+                    return {"error": "No advertiser_agents found in response data"}
+                elif status == "error":
+                    error_msg = payload.get("error", {}).get("message", "Unknown error")
                     return {"error": error_msg}
 
                 return {"error": "Unexpected response format"}
             except httpx.HTTPStatusError as http_err:
                 logger.error(
-                    f"HTTP error on attempt {attempt} of {max_retries}: {http_err}"
+                    f"HTTP error on attempt {attempt} of {num_retries}: {http_err}"
                 )
-                if attempt == max_retries:
+                if attempt == num_retries:
                     return {"error": str(http_err)}
                 await asyncio.sleep(backoff_factor * (2 ** (attempt - 1)))
             except (httpx.ConnectError, httpx.ReadTimeout) as conn_err:
                 logger.error(
-                    f"Connection error on attempt {attempt} of {max_retries}: {conn_err}"
+                    f"Connection error on attempt {attempt} of {num_retries}: {conn_err}"
                 )
-                if attempt == max_retries:
+                if attempt == num_retries:
                     return {"error": str(conn_err)}
                 await asyncio.sleep(backoff_factor * (2 ** (attempt - 1)))
             except Exception as err:

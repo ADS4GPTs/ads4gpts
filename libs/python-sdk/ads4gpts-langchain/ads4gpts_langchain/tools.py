@@ -1,4 +1,3 @@
-import os
 import logging
 from typing import Any, Dict, Union, List, Optional, Type, Literal, Annotated
 
@@ -9,6 +8,7 @@ from ads4gpts_langchain.utils import get_from_dict_or_env, get_ads, async_get_ad
 from langgraph.types import Command
 from langchain_core.tools.base import InjectedToolCallId
 from langchain_core.messages import ToolMessage
+import uuid
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -24,9 +24,9 @@ logger.addHandler(handler)
 class Ads4gptsBaseInput(BaseModel):
     """Base Input schema for Ads4gpts tools."""
 
-    id: str = Field(
+    tid: str = Field(
         ...,
-        description="Unique identifier for the session or user (hashed or anonymized to ensure privacy).",
+        description="UUID unique identifier for the session or user (hashed or anonymized to ensure privacy).",
     )
     user_gender: Literal["MALE", "FEMALE", "OTHER", "UNDISCLOSED"] = Field(
         default="UNDISCLOSED", description="Gender of the user."
@@ -75,6 +75,19 @@ class Ads4gptsBaseInput(BaseModel):
             raise ValueError(
                 f"Invalid gender value: {gender}. Must be one of {valid_genders}"
             )
+
+        return values
+
+    @model_validator(mode="before")
+    def validate_tid(cls, values):
+        """Validate tid field to ensure it's a valid UUID."""
+
+        tid = values.get("tid")
+        if tid:
+            try:
+                uuid.UUID(tid)
+            except ValueError:
+                raise ValueError(f"Invalid UUID format for tid: {tid}")
 
         return values
 
@@ -229,7 +242,7 @@ class Ads4gptsInlineSponsoredResponseTool(Ads4gptsBaseTool):
         Tool for retrieving relevant Inline Sponsored Responses (Native Ads) based on the provided user attributes and context.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.
@@ -254,7 +267,7 @@ class Ads4gptsSuggestedPromptTool(Ads4gptsBaseTool):
         Tool for retrieving Suggested Prompts (Pre-Chat Ads) that engage users with relevant prompts before a conversation begins.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.
@@ -277,7 +290,7 @@ class Ads4gptsInlineConversationalTool(Ads4gptsBaseTool):
         Tool for retrieving Inline Conversational ads that flow naturally within the conversation context.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.
@@ -302,7 +315,7 @@ class Ads4gptsInlineBannerTool(Ads4gptsBaseTool):
         Tool for retrieving Inline Banner ads that can be displayed within the conversation interface.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.
@@ -325,7 +338,7 @@ class Ads4gptsSuggestedBannerTool(Ads4gptsBaseTool):
         Tool for retrieving Suggested Banner ads that can be recommended to users before or after a conversation.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.
@@ -348,7 +361,7 @@ class Ads4gptsInlineReferralTool(Ads4gptsBaseTool):
         Tool for retrieving Inline Referral ads that can be used to recommend products or services based on user conversations.
 
         Args:
-            id (str): Unique identifier for the session or user (hashed or anonymized to ensure privacy).
+            tid (str): UUID unique identifier for ad impression.
             user_gender (str): Gender of the user.
             user_age (str): Age range of the user.
             user_persona (str): A descriptive persona of the user based on their interests and behaviors.

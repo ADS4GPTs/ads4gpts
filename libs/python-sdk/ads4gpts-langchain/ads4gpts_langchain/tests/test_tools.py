@@ -17,7 +17,7 @@ from ads4gpts_langchain.toolkit import Ads4gptsToolkit
 def base_tool():
     return Ads4gptsBaseTool(
         ads4gpts_api_key="test_api_key",
-        base_url="https://ads-api-fp3g.onrender.com/",
+        base_url="https://ads-api-dev.onrender.com/",
         ads_endpoint="api/v1/ads",
     )
 
@@ -26,7 +26,7 @@ def base_tool():
 def inline_sponsored_response_tool():
     return Ads4gptsInlineSponsoredResponseTool(
         ads4gpts_api_key="test_api_key",
-        base_url="https://ads-api-fp3g.onrender.com/",
+        base_url="https://ads-api-dev.onrender.com/",
     )
 
 
@@ -34,7 +34,7 @@ def inline_sponsored_response_tool():
 def suggested_prompts_tool():
     return Ads4gptsSuggestedPromptTool(
         ads4gpts_api_key="test_api_key",
-        base_url="https://ads-api-fp3g.onrender.com/",
+        base_url="https://ads-api-dev.onrender.com/",
     )
 
 
@@ -49,7 +49,7 @@ def toolkit():
 
 def test_base_tool_initialization(base_tool):
     assert base_tool.ads4gpts_api_key == "test_api_key"
-    assert base_tool.base_url == "https://ads-api-fp3g.onrender.com/"
+    assert base_tool.base_url == "https://ads-api-dev.onrender.com/"
     assert base_tool.ads_endpoint == "api/v1/ads"
 
 
@@ -57,7 +57,7 @@ def test_base_tool_initialization(base_tool):
 def test_base_tool_run(mock_get_ads, base_tool):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = base_tool._run(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",  # updated from "female"
         user_age_range="25-34",
         user_persona="test_persona",
@@ -78,7 +78,7 @@ def test_base_tool_run(mock_get_ads, base_tool):
 async def test_base_tool_arun(mock_async_get_ads, base_tool):
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await base_tool._arun(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",  # updated from "female"
         user_age_range="25-34",
         user_persona="test_persona",
@@ -99,7 +99,7 @@ def test_inline_sponsored_response_tool_initialization(
 ):
     assert inline_sponsored_response_tool.ads4gpts_api_key == "test_api_key"
     assert (
-        inline_sponsored_response_tool.base_url == "https://ads-api-fp3g.onrender.com/"
+        inline_sponsored_response_tool.base_url == "https://ads-api-dev.onrender.com/"
     )
     assert inline_sponsored_response_tool.ads_endpoint == "api/v1/ads/"
 
@@ -110,7 +110,7 @@ def test_inline_sponsored_response_tool_run(
 ):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = inline_sponsored_response_tool._run(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",  # updated from "female"
         user_age_range="25-34",
         user_persona="test_persona",
@@ -134,7 +134,7 @@ async def test_inline_sponsored_response_tool_arun(
 ):
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await inline_sponsored_response_tool._arun(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",  # updated from "female"
         user_age_range="25-34",
         user_persona="test_persona",
@@ -153,7 +153,7 @@ async def test_inline_sponsored_response_tool_arun(
 
 def test_suggested_prompts_tool_initialization(suggested_prompts_tool):
     assert suggested_prompts_tool.ads4gpts_api_key == "test_api_key"
-    assert suggested_prompts_tool.base_url == "https://ads-api-fp3g.onrender.com/"
+    assert suggested_prompts_tool.base_url == "https://ads-api-dev.onrender.com/"
     assert suggested_prompts_tool.ads_endpoint == "api/v1/ads/"
 
 
@@ -249,13 +249,13 @@ def test_toolkit_set_api_key_from_env():
 def referral_tool():
     return Ads4gptsInlineReferralTool(
         ads4gpts_api_key="test_api_key",
-        base_url="https://ads-api-fp3g.onrender.com/",
+        base_url="https://ads-api-dev.onrender.com/",
     )
 
 
 def test_referral_tool_initialization(referral_tool):
     assert referral_tool.ads4gpts_api_key == "test_api_key"
-    assert referral_tool.base_url == "https://ads-api-fp3g.onrender.com/"
+    assert referral_tool.base_url == "https://ads-api-dev.onrender.com/"
     assert referral_tool.ads_endpoint == "api/v1/ads/"
 
 
@@ -263,7 +263,7 @@ def test_referral_tool_initialization(referral_tool):
 def test_referral_tool_run(mock_get_ads, referral_tool):
     mock_get_ads.return_value = {"ads": "test_ad"}
     result = referral_tool._run(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",
         user_age_range="25-34",
         user_persona="test_persona",
@@ -285,7 +285,7 @@ def test_referral_tool_run(mock_get_ads, referral_tool):
 async def test_referral_tool_arun(mock_async_get_ads, referral_tool):
     mock_async_get_ads.return_value = {"ads": "test_ad"}
     result = await referral_tool._arun(
-        id="test_id",
+        tid="aadc300e-6957-480a-9685-7628446fc319",
         user_gender="FEMALE",
         user_age_range="25-34",
         user_persona="test_persona",
